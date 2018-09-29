@@ -1,11 +1,23 @@
 <div class="card">
-    <div class="card-block">
+    <div class="card-body">
 
-        <h2 class="card-title">Ups, wystąpił błąd wewnętrzny witryny...</h2>
-        <p class="card-text">Przepraszamy, w działaniu witryny wystąpił błąd.
-            Przejdź na <?= $this->linkTo('stronę główną serwisu', '/') ?> i spróbuj ponownie.
-            Jeżeli błąd będzie się powtarzał, prosimy o wysłanie na adres
-            <?= $this->mailTo('support@rebel.pl') ?> informacji o okolicznościach wystapienia błędu.</p>
+        <h1 style="font-size: 50px; font-weight: bold;">Ups, wystąpił błąd wewnętrzny witryny...</h1>
+
+        <p>
+            <?= $this->linkTo($this->icon('arrow-left') . ' przejdź na stronę główną serwisu', '/') ?>
+            lub
+            <?= $this->mailTo('tech@rebel.pl?' . $this->buildQuery([
+                    'subject' => sprintf('500: Wystąpił błąd: %s', $this->currentUrl()),
+                    'body' => sprintf("Nieprawidłowy link: %s\nPrzekierowanie z: %s", $this->backUrl(), isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '- brak danych -')
+                ]), 'napisz do działu IT') ?> z informacją o okolicznościach wystapienia błędu.
+        </p>
+
+        <div style="background-image: url(http://i.imgur.com/lHEIfVV.gif); background-size: cover; min-height: 500px;"></div>
 
     </div>
+    <div class="card-footer text-nowrap text-truncate">
+        500: Wystąpił błąd: <small class="text-muted"><?= $this->getRequest()->getCurrentPath() ?></small> |
+        Przekierowanie z: <small class="text-muted"><?= isset($_SERVER['HTTP_REFERER']) ? preg_replace('/\?.*/', '?...', $_SERVER['HTTP_REFERER']) : '- brak danych -' ?></small>
+    </div>
+
 </div>

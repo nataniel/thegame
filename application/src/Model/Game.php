@@ -2,6 +2,7 @@
 namespace Main\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\EntityRepository;
 use E4u\Exception\RuntimeException;
 use E4u\Model\Entity;
 use Main\Model\Player\Technology,
@@ -343,7 +344,7 @@ class Game extends Entity
     }
 
     /**
-     * @return Game\Repository
+     * @return Game\Repository|EntityRepository
      */
     public static function getRepository()
     {

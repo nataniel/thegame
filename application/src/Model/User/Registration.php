@@ -62,6 +62,8 @@ class Registration
                 Exception::EMAIL_ALREADY_REGISTERED);
 
         }
+
+        return $this;
     }
 
     /**
@@ -87,7 +89,6 @@ class Registration
         }
 
         $this->user
-            ->addToGroup(User\Group::ZAREJESTROWANI_UZYTKOWNICY)
             ->setActive(true);
         return $this;
     }

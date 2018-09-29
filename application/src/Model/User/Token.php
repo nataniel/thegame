@@ -57,7 +57,7 @@ class Token extends \E4u\Model\Entity
     }
 
     /**
-     * @return Token
+     * @return $this
      */
     public function setExpired()
     {
@@ -65,6 +65,9 @@ class Token extends \E4u\Model\Entity
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getValue()
     {
         return $this->value;
@@ -81,7 +84,7 @@ class Token extends \E4u\Model\Entity
     }
 
     /**
-     * @return Token
+     * @return $this
      */
     public function generateHash()
     {
@@ -90,7 +93,7 @@ class Token extends \E4u\Model\Entity
     }
     
     /**
-     * @return Token
+     * @return $this
      */
     public function save()
     {
@@ -98,7 +101,8 @@ class Token extends \E4u\Model\Entity
             $this->generateHash();
         }
         
-        return parent::save();
+        parent::save();
+        return $this;
     }
 
     /**

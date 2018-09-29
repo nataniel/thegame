@@ -1,9 +1,10 @@
 <?php
 namespace Main\Model;
 
-use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\EntityRepository;
 use E4u\Common\File\Image;
 use E4u\Authentication\Identity\User as E4uUser;
+use Main\Model\User\Privilege;
 use Zend\Mail\Address\AddressInterface;
 
 /**
@@ -44,12 +45,6 @@ class User extends E4uUser implements AddressInterface
      * @OrderBy({"name" = "ASC"})
      **/
     protected $preferences;
-
-    /**
-     * @var User\Group[]|ArrayCollection
-     * @OneToMany(targetEntity="Main\Model\User\Group", mappedBy="user", cascade={"all"}, orphanRemoval=true, indexBy="group_id")
-     */
-    protected $groups;
 
     /**
      * @param  string $email
@@ -100,10 +95,14 @@ class User extends E4uUser implements AddressInterface
     public function hasPrivilege($value)
     {
         if (true === $value) {
-            return true;
+            return $this->isActive();
         }
 
-        return $this->belongsTo(User\Group::ADMINISTRATORZY);
+        if (Privilege::ADMIN === $value) {
+            return $this->id === 1;
+        }
+
+        return false;
     }
 
     /**
@@ -254,7 +253,7 @@ class User extends E4uUser implements AddressInterface
     }
 
     /**
-     * @return User\Repository
+     * @return User\Repository|EntityRepository
      */
     public static function getRepository()
     {
@@ -262,97 +261,21 @@ class User extends E4uUser implements AddressInterface
     }
 
     /**
-     * @return User\Group[]
+     * @return string
      */
-    public function getGroups()
-    {
-        return $this->groups;
-    }
-
-    /**
-     * @param  int[] $ids
-     * @return $this
-     */
-    public function setGroups($ids)
-    {
-        $this->groups->clear();
-        foreach ($ids as $id) {
-            $this->addToGroup($id);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param  int $id
-     * @return $this
-     */
-    public function addToGroup($id)
-    {
-        if (!$this->belongsTo($id)) {
-            $this->_addTo('groups', [ 'group_id' => $id, 'user' => $this ], false);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param  int $id
-     * @return $this
-     */
-    public function delFromGroup($id)
-    {
-        $id = (int)$id;
-        foreach ($this->getGroups() as $group){
-            if ($group->id() === $id) {
-                $this->_delFrom('groups', $group);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param  int $id
-     * @return bool
-     */
-    public function isInGroup($id)
-    {
-        $id = (int)$id;
-        foreach ($this->getGroups() as $group){
-            if ($group->id() === $id) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * @param  int $groupId
-     * @return bool
-     */
-    public function belongsTo($groupId)
-    {
-        return $this->isInGroup($groupId);
-    }
-
     public function toUrl()
     {
-        return [
-            'controller' => 'users',
-            'action' => 'show',
-            'id' => $this->id(),
-        ];
+        return '/users/show/' . $this->id;
     }
 
     /**
      * @param  User\Profile $profile
+     * @param  bool $keepConsistency
      * @return $this
      */
-    public function addToProfiles($profile)
+    public function addToProfiles($profile, $keepConsistency = true)
     {
-        $this->_addTo('profiles', $profile, true);
+        $this->_addTo('profiles', $profile, $keepConsistency);
         return $this;
     }
 
@@ -362,16 +285,6 @@ class User extends E4uUser implements AddressInterface
     public function hasPassword()
     {
         return !empty($this->encrypted_password);
-    }
-
-    /**
-     * Czy konto uzytkownika jest zablokowane (nie mozna go aktywowac)?
-     *
-     * @return bool
-     */
-    public function isBlocked()
-    {
-        return false;
     }
 
     /**

@@ -40,6 +40,21 @@ return [
     ],
 
     /**
+     * Reset cache
+     */
+    'reset' => [
+        'type' => Zend\Mvc\Router\Http\Literal::class,
+        'options' => [
+            'route'    => '/reset',
+            'defaults' => [
+                'module'     => null,
+                'controller' => 'admin',
+                'action'     => 'reset',
+            ],
+        ],
+    ],
+
+    /**
      * A Game
      * @example /game/1
      */
