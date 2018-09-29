@@ -1,0 +1,58 @@
+<?php
+/** @var \Main\View\Base $this */
+/** @var \Main\Model\Game $game */
+$game = $this->game;
+
+/** @var \Main\Model\Player $player */
+$player = $this->player;
+?>
+<table class="table table-sm" id="assetsTechnologies">
+    <thead>
+    <tr><th colspan="2"><?= $this->t('Dostępne technologie') ?></th></tr>
+    </thead>
+    <tbody>
+    <? foreach ($player->getAvailableTechnologies() as $technology): ?>
+        <? if ($technology->canBeDeveloped()): ?>
+        <tr>
+
+            <td>
+                <?= $this->linkTo($this->t($technology), 'games/develop/' . $game->id() . '?type=' . $technology->getType(), [ 'title' => $this->t($technology->getDescription()) ]) ?>
+                <? if ($player->getActiveTechnology() === $technology): ?>
+                    <div style="position: relative; margin-top: .3rem">
+                        <? $progress = $player->getSupplyByType('science')->productionAmount() / $technology->getPriceScience() * \Main\Model\Player\Technology::PROGRESS_FULL ?>
+
+                        <div class="progress">
+
+                            <?= $this->tag('div', [
+                                'class' => 'progress-bar',
+                                'style' => 'width: ' . ($technology->getProgress() / \Main\Model\Player\Technology::PROGRESS_FULL * 100) . '%',
+                                'role' => 'progressbar',
+                                'aria-valuenow' => $technology->getProgress(),
+                                'aria-valuemin' => 0,
+                                'aria-valuemax' => \Main\Model\Player\Technology::PROGRESS_FULL,
+                            ], '') ?>
+
+                            <?= $this->tag('div', [
+                                'class' => 'progress-bar bg-info',
+                                'style' => 'width: ' . ($progress / \Main\Model\Player\Technology::PROGRESS_FULL * 100) . '%',
+                                'aria-valuenow' => $progress,
+                                'aria-valuemin' => 0,
+                                'aria-valuemax' => \Main\Model\Player\Technology::PROGRESS_FULL,
+                            ], '') ?>
+
+                        </div>
+
+                    </div>
+                <? endif; ?>
+            </td>
+
+        </tr>
+        <? endif; ?>
+    <? endforeach; ?>
+    </tbody>
+    <tfoot>
+    <tr>
+        <td colspan="2" class="small">(<?= $this->linkTo($this->t('zobacz wynalezione technologie'), 'games/technologies/' . $game->id(), [ 'class' => 'text-muted' ]) ?>)</td>
+    </tr>
+    </tfoot>
+</table>

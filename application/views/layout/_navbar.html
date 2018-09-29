@@ -1,0 +1,55 @@
+<?php
+/** @var $this Main\View\Base */
+/** @var $user \Main\Model\User */
+$user = $this->getCurrentUser();
+?>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top">
+
+    <div class="container">
+        <?= $this->linkTo('THE GAME', '/', [ 'class' => 'navbar-brand' ]) ?>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item hidden-sm-down">
+                <a class="nav-link" href="#">Lorem</a>
+            </li>
+            <li class="nav-item hidden-sm-down">
+                <a class="nav-link" href="#">Ipsum</a>
+            </li>
+            <li class="nav-item hidden-sm-down">
+                <a class="nav-link" href="#">About</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav mr-0">
+            <?php if (!empty($user)): ?>
+
+                <li class="nav-item hidden-xs-down">
+                    <?= $this->linkTo($this->t('Ustawienia'), '/account', [ 'class' => 'flaticon-cogwheel nav-link' ]) ?>
+                </li>
+                <li class="nav-item">
+                    <?= $this->linkTo($this->t('Wyloguj się'), '/security/logout', [ 'class' => 'flaticon-shutdown nav-link' ]) ?>
+                </li>
+
+            <? else: ?>
+
+                <li class="nav-item">
+                    <?= $this->linkTo($this->t('Zaloguj się'), '/security/login', [ 'class' => 'flaticon-user nav-link' ]) ?>
+                </li>
+
+            <? endif; ?>
+
+            <li class="nav-item">
+                <?= $this->linkTo('PL', 'locale/pl', [ 'class' => 'nav-link' . ($this->getLocale() == 'pl' ? ' active' : ''), 'back' => true ]) ?>
+            </li>
+            <li class="nav-item">
+                <?= $this->linkTo('EN', 'locale/en', [ 'class' => 'nav-link' . ($this->getLocale() == 'en' ? ' active' : ''), 'back' => true ]) ?>
+            </li>
+
+        </ul>
+    </div>
+    </div>
+</nav>

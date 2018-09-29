@@ -1,0 +1,23 @@
+#!/usr/bin/env php
+<?php
+chdir(dirname(__DIR__));
+
+// Your application namespace
+define('APPLICATION', 'Main');
+
+// Bootstrap E4u\Application
+require_once 'vendor/autoload.php';
+$config = E4u\Loader::configureApplication(APPLICATION);
+
+// Default set of commands:
+// tools/console
+// tools/console start
+// tools/console fixtures:load * --environment=test
+// tools/console tests:generate E4u\Model\Base
+// tools/console tests:run E4u\Model\Base
+// tools/console tests:run:all
+$console = new E4u\Tools\Console($config);
+
+// Add your own commands here
+// Main\Tools\Console\Import::addCommands($console))
+$console->run();

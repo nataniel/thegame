@@ -1,0 +1,8 @@
+#!/usr/bin/env php
+<?php
+chdir(__DIR__);
+
+passthru('svn up --quiet --non-interactive');
+passthru('composer install --quiet --no-interaction');
+passthru('tools' . DIRECTORY_SEPARATOR . 'doctrine migrations:migrate --quiet --no-interaction');
+passthru('tools' . DIRECTORY_SEPARATOR . 'console tests:run:all');

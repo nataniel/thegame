@@ -1,0 +1,12 @@
+<?php
+/** @var \Main\View\Base $this */
+/** @var \Main\Model\Game $game */
+$game = $this->game;
+?>
+
+    <h1>
+        <?= '#' . $game->id() . ': ' . $game->getName() ?>
+        <small class="text-muted"><?= $this->t('game.status.' . $game->getCurrentStatus(), $game->getCurrentTurn()) ?></small>
+    </h1>
+
+<?= $this->render('games/_players') ?>

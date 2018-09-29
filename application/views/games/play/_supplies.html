@@ -1,0 +1,37 @@
+<?php
+/** @var \Main\View\Base $this */
+/** @var \Main\Model\Game $game */
+$game = $this->game;
+
+/** @var \Main\Model\Player $player */
+$player = $this->player;
+?>
+<table class="table table-sm" id="assetsSupplies">
+    <thead>
+    <tr>
+        <th colspan="3"><?= $this->t('Zasoby <small>(produkcja)</small>') ?></th>
+    </tr>
+    </thead>
+    <tbody>
+    <? foreach ($player->getAvailableSupplies() as $supply): ?>
+        <? $production = $supply->productionAmount(); ?>
+        <tr>
+            <td style="text-align: center; width: 32px;"><?= $this->image('images/resources/' . $supply->getType() . '.png', $this->t($supply)) ?></td>
+            <td><?= $this->tag('span', [ 'title' => $this->t($supply->getDescription()) ], $this->t($supply->getName())) ?>:</td>
+
+            <td style="text-align: right; white-space: nowrap">
+                <?= $supply->getAmount() ?>
+                <small data-toggle="tooltip-next" data-placement="left"><?= sprintf('(%+d)', $production) ?></small>
+                <div class="tooltip-html">
+                    <? $html = []; ?>
+                    <? foreach ($supply->productionMap() as $class => $amount): ?>
+                        <? $asset = $player->getAssetByClass($class); ?>
+                        <? $html[] = sprintf('%s: %+d', $this->t($asset), $amount) ?>
+                    <? endforeach; ?>
+                    <?= join('<br />', $html) ?>
+                </div>
+            </td>
+        </tr>
+    <? endforeach; ?>
+    </tbody>
+</table>

@@ -1,0 +1,38 @@
+<?= $this->_('doctype') ?>
+<html lang="<?= $this->getLocale() ?>">
+<head>
+    <?= $this->render('layout/_shared') ?>
+    <?= $this->stylesheets([ 'default', 'sidebar', ]) ?>
+</head>
+
+<body class="layout-default" id="<?= $this->controllerID() ?>"
+      itemscope itemtype="http://schema.org/WebPage">
+
+<?= $this->render('layout/_navbar') ?>
+<div class="container" style="margin-top: 1rem; margin-bottom: 1rem;">
+
+    <?= $this->render('layout/_flash') ?>
+
+    <div class="row">
+        <main class="col-lg-8" id="content">
+            <?= $this->getPartial('content') ?>
+        </main>
+        <aside class="col-lg-4 hidden-md-down" id="sidebar">
+
+            <?#= $this->render('layout/_sidebar') ?>
+            <div class="card bg-dark text-white">
+                <div class="card-body">
+                <h4 class="card-title">Czy wiesz, że?</h4>
+                <p class="card-text">W tym miejscu będą pojawiały się hinty albo cholera wie co, jeszcze nie wiem :)</p>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                </div>
+            </div>
+
+        </aside>
+    </div>
+
+</div>
+<?= $this->render('layout/_lightbox') ?>
+
+</body>
+</html>

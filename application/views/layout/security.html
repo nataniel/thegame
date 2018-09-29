@@ -1,0 +1,22 @@
+<?= $this->_('doctype') ?>
+<html lang="<?= $this->getLocale() ?>">
+<head>
+    <?= $this->render('layout/_shared') ?>
+    <?= $this->stylesheets([ 'security' ]) ?>
+</head>
+
+<body class="layout-security" id="<?= $this->controllerID() ?>"
+      itemscope itemtype="http://schema.org/WebPage"
+      style="background-image: <?= \Main\Helper\RandomBackground::security() ?>; background-size: cover; margin-top: 2%">
+    <div class="container">
+
+        <div class="row mt-4">
+            <div class="col-6 offset-3">
+                <?= $this->render('layout/_flash') ?>
+                <?= $this->getPartial('content') ?>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

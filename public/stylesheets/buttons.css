@@ -1,0 +1,109 @@
+.btn {
+    transition: background-color 0.5s ease;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+/*.btn-default:hover {*/
+    /*background-color: #eee;*/
+    /*border-color: #ccc;*/
+/*}*/
+
+/*.btn-primary:hover {*/
+    /*background-color: #f1c40f;*/
+    /*border-color: #f39c12;*/
+/*}*/
+
+/*.btn-success:hover {*/
+    /*background-color: #2ecc71;*/
+    /*border-color: #27ae60;*/
+/*}*/
+
+/*.btn-info:hover {*/
+    /*background-color: #4eb2f5;*/
+    /*border-color: #2980b9;*/
+/*}*/
+
+/*.btn-warning:hover {*/
+    /*background-color: #e67e22;*/
+    /*border-color: #d35400;*/
+/*}*/
+
+/*.btn-danger:hover {*/
+    /*background-color: #e74c3c;*/
+    /*border-color: #c0392b;*/
+/*}*/
+
+/*.btn-xxs, .btn-group-xxs > .btn {*/
+    /*font-size: 9px;*/
+    /*padding: 1px 5px;*/
+    /*line-height: 1.5;*/
+/*}*/
+
+/*.btn-xs, .btn-group-xs > .btn {*/
+    /*padding: 2px 8px;*/
+/*}*/
+
+.btn-facebook {
+    background-color: #3b5998;
+    color: #fff;
+}
+
+.btn-facebook:hover,
+.btn-facebook:focus,
+.btn-facebook:active {
+    background-color: #5573b2;
+    color: #fff;
+}
+
+.btn-twitter {
+    background-color: #62bdb2;
+    color: #fff;
+}
+
+.btn-twitter:hover,
+.btn-twitter:focus,
+.btn-twitter:active {
+    background-color: #7cd7cc;
+    color: #fff;
+}
+
+.btn-google {
+    background-color: #c4302b;
+    color: #fff;
+}
+
+.btn-google:hover,
+.btn-google:focus,
+.btn-google:active {
+    background-color: #de4a45;
+    color: #fff;
+}
+
+.btn-steam {
+    background-color: #231f20;
+    color: #fff;
+}
+
+.btn-steam:hover,
+.btn-steam:focus,
+.btn-steam:active {
+    background-color: #041737;
+    color: #fff;
+}
+
+.btn[class^="flaticon-"]:before,
+.btn[class*=" flaticon-"]:before {
+    font-size: inherit;
+    margin: 0 5px 0 0;
+}
+
+.btn-icon {
+    width: 28px;
+    text-overflow: clip;
+}
+
+.btn-icon[class^="flaticon-"]:before,
+.btn-icon[class*=" flaticon-"]:before {
+    margin-right: 20px;
+}

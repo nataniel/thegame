@@ -1,0 +1,36 @@
+#!/usr/bin/env php
+<?php
+chdir(dirname(__DIR__));
+
+// Your application namespace
+define('APPLICATION', 'Main');
+
+// Bootstrap E4u\Application
+require_once 'vendor/autoload.php';
+E4u\Loader::configureApplication(APPLICATION);
+echo sprintf("Environment loaded: %s\n", E4u\Loader::getEnvironment());
+
+// Bootstrap Doctrine\ORM\EntityManager
+$em = E4u\Loader::getDoctrine();
+
+$helperSet = Doctrine\ORM\Tools\Console\ConsoleRunner::createHelperSet($em);
+$helperSet->set(new \Symfony\Component\Console\Helper\QuestionHelper(), 'question');
+
+$commands = [
+    new \Doctrine\DBAL\Migrations\Tools\Console\Command\ExecuteCommand(),
+    new \Doctrine\DBAL\Migrations\Tools\Console\Command\GenerateCommand(),
+    new \Doctrine\DBAL\Migrations\Tools\Console\Command\LatestCommand(),
+    new \Doctrine\DBAL\Migrations\Tools\Console\Command\MigrateCommand(),
+    new \Doctrine\DBAL\Migrations\Tools\Console\Command\StatusCommand(),
+    new \Doctrine\DBAL\Migrations\Tools\Console\Command\VersionCommand(),
+    new \Doctrine\DBAL\Migrations\Tools\Console\Command\DiffCommand(),
+];
+
+// Migrations configuration
+$config = \E4u\Loader::configureMigrations();
+foreach ($commands as $cmd) {
+    $cmd->setMigrationConfiguration($config);
+}
+
+// Run Doctrine CLI
+\Doctrine\ORM\Tools\Console\ConsoleRunner::run($helperSet, $commands);

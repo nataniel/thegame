@@ -1,0 +1,38 @@
+<?php
+/** @var \Main\View\Base $this */
+/** @var \Main\Model\Game $game */
+$game = $this->game;
+
+/** @var \Main\Model\Player $player */
+$player = $this->player;
+
+/** @var \Main\Model\Player\Technology[] $technologies */
+$technologies = $this->technologies;
+?>
+<small class="float-xl-right small">
+    ( <?= $this->linkTo('wróc do rozgrywki', $game->toUrl()) ?> )
+</small>
+
+<h1 class="mb-2">
+    <?= $this->t('Wynalezione technologie') ?>
+</h1>
+<ul>
+<? foreach ($technologies as $technology): ?>
+    <li>
+        <p>
+            <strong><?= $this->t($technology) ?></strong>
+            <small class="text-muted"><?= $this->t($technology->getDescription()) ?></small>
+        </p>
+
+        <ul class="mb-1">
+        <? foreach ($technology->availableTechnologies() as $technology): ?>
+            <? $asset = $player->getAssetByClass($technology); ?>
+            <li>
+                <?= $this->t($asset) ?>
+                <small class="text-muted"><?= $this->t($asset->getDescription()) ?></small><br />
+            </li>
+        <? endforeach; ?>
+        </ul>
+    </li>
+<? endforeach; ?>
+</ul>

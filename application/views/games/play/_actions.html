@@ -1,0 +1,27 @@
+<?php
+/** @var \Main\View\Base $this */
+/** @var \Main\Model\Game $game */
+$game = $this->game;
+
+/** @var \Main\Model\Player $player */
+$player = $this->player;
+?>
+
+<? if ($player->getTotalStrength() == 0): ?>
+    <p class="text-danger bg-faded" style="padding: 10px; border: 1px solid #c00">
+        <?= $this->t('<strong>Twoje królestwo nie jest bronione!</strong> W przypadku ataku nastąpi koniec gry.') ?>
+    </p>
+<? endif; ?>
+
+<?php if ($player->getCurrentPhase() == \Main\Model\Player::PHASE_ACTION): ?>
+
+    <p style="overflow: hidden; border-top: 1px solid #eee; padding: 10px; background-color: #eee;" class="text-right">
+
+        <?= $this->linkTo($this->t('Zakończ aktualną turę'),
+            'games/endturn/' . $game->id(), [
+                'class' => 'btn btn-warning flaticon-time',
+                // 'confirm' => $this->t('Czy na pewno zakończyć aktualną turę?')
+            ]) ?>
+    </p>
+
+<? endif; ?>

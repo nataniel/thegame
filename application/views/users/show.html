@@ -1,0 +1,24 @@
+<?php
+/** @var \Main\View\Base $this */
+/** @var \Main\Model\User $user */
+$user = $this->user;
+
+/** @var \Main\Model\Game[] $activeGames */
+$activeGames = $this->activeGames;
+
+/** @var \Main\Model\Game[] $finishedGames */
+$finishedGames = $this->finishedGames;
+?>
+<?= $this->_('avatar', $user, 100) ?>
+<h1><?= $this->getTitle() ?></h1>
+<p class="text-muted"><?= $user->showEntity() ?></p>
+
+<? if (count($activeGames) > 0): ?>
+    <h2><?= $this->t('Aktywne rozgrywki') ?></h2>
+    <?= $this->render('index/_games', [ 'games' => $activeGames, ])?>
+<? endif; ?>
+
+<? if (count($finishedGames) > 0): ?>
+    <h2><?= $this->t('Zakończone rozgrywki') ?></h2>
+    <?= $this->render('index/_games', [ 'games' => $finishedGames, ])?>
+<? endif; ?>

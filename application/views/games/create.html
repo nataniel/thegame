@@ -1,0 +1,16 @@
+<?php
+/** @var \Main\View\Base $this */
+$form = $this->createBootstrapForm($this->createForm);
+?>
+
+<h2><?= $this->getTitle() ?></h2>
+<?= $form->start() ?>
+<div class="row">
+
+    <?= $form->text('name', [ 'group_class' => 'col-md-4' ]) ?>
+    <?= $form->select('max_players', [ 'group_class' => 'col-md-2', 'style' => 'text-align: right;' ]) ?>
+    <?= $form->text('password', [ 'group_class' => 'col-md-3', 'hint' => 'Jeżeli chcesz ograniczyć rozgrywkę do znajomych, utwórz hasło.' ]) ?>
+    <?= $form->button('submit', [ 'button_class' => 'btn-block', 'group_class' => 'col-md-3' ]) ?>
+
+</div>
+<?= $form->end() ?>

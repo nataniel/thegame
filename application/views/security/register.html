@@ -1,0 +1,54 @@
+<?php
+/** @var \Main\View\Base $this */
+$form = $this->createBootstrapForm($this->form);
+?>
+
+<div class="card-group">
+
+    <div class="card text-white bg-dark" style="background-color: #333; border-color: #333;">
+        <div class="card-body">
+
+            <h2 class="card-title">The Game</h2>
+            <p class="card-text">Litwo! Ojczyzno moja! Ty jesteś jak zdrowie. Ile cię stracił. Dziś człowieka nie siedzi Rejtan żałośny po cichu. gdy zacność domu, i dalej mówił: Grzeczność nie decyduj i wzgląd na świecie ogar i rzekł: Dziś, nowym zwyczajem my na Ojczyzny łono. Tymczasem na trzykrólskie święta przesuwają w głównym sądzie.</p>
+
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+
+            <h2 class="card-title">Rejestracja konta</h2>
+            <?= $form->errors() ?>
+            <?= $form->start() ?>
+
+            <div class="form-row">
+
+                <div class="col-6">
+                    <?= $form->text('name', [ 'append' => $this->icon('user'), ]) ?>
+                </div>
+                <div class="col-6">
+                    <?= $form->text('email', [ 'append' => $this->icon('email'), 'input_type' => 'email' ]) ?>
+                </div>
+                <div class="col-6">
+                    <?= $form->text('password', [ 'append' => $this->icon('password'), 'input_type' => 'password' ]) ?>
+                </div>
+                <div class="col-6">
+                    <?= $form->text('password_confirmation', [ 'append' => $this->icon('password'), 'input_type' => 'password' ]) ?>
+                </div>
+
+                <div class="col offset-6">
+                    <?= $form->button('submit', [ 'button_class' => 'btn-primary btn-block' ]) ?>
+                </div>
+
+            </div>
+
+            <?= $form->end() ?>
+
+        </div>
+        <div class="card-footer text-muted">
+            <p class="card-text">Masz już konto? <?= $this->linkTo('Zaloguj się', 'security/login') ?>.</p>
+        </div>
+
+    </div>
+
+</div>

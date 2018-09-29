@@ -1,0 +1,69 @@
+[class*="flaticon"]:before {
+    font-size: inherit;
+    margin-right: 0.5em;
+    margin-left: 0;
+    display: inline-block;
+}
+
+[class*="flaticon"]:empty:before {
+    margin-right: 0;
+}
+
+.alert[class*="flaticon"] {
+    padding-left: 40px;
+}
+
+.alert[class*="flaticon"]:before {
+    float: left;
+    margin: 1px 5px 0 -25px;
+}
+
+.tooltip-html {
+    display: none;
+}
+
+.tooltip.bs-tether-element-attached-left .tooltip-inner {
+    text-align: left;
+}
+
+.tooltip.bs-tether-element-attached-right .tooltip-inner {
+    text-align: right;
+}
+
+.social .facebook {
+    color: #3b5998;
+}
+
+.social .twitter {
+    color: #62bdb2;
+}
+
+.social .youtube {
+    color: #c4302b;
+}
+
+.social .rss {
+    color: #f58432;
+}
+
+.social .steam {
+    color: #231f20;
+}
+
+.social a:hover,
+.social a:focus,
+.social a:active {
+    text-decoration: none;
+}
+
+#content .avatar {
+    margin: 0 0 0 0;
+    border-radius: 50%;
+    float: left;
+    max-width: 100px;
+    max-height: 100px;
+}
+
+tr.collapse.in {
+    display: table-row;
+}

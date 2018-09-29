@@ -1,0 +1,43 @@
+<?php
+/** @var \Main\View\Base $this */
+$form = $this->createBootstrapForm($this->form);
+?>
+
+<div class="card-group">
+    <div class="card">
+
+        <div class="card-body">
+            <h2 class="card-title">Ustawienie nowego hasła</h2>
+            <?= $form->start() ?>
+            <?= $form->errors() ?>
+            <div class="form-row">
+                <div class="col-6">
+                    <?= $form->text('password', [ 'prepend' => $this->icon('password'), 'input_type' => 'password' ]) ?>
+                </div>
+                <div class="col-6">
+                    <?= $form->text('login', [ 'prepend' => $this->icon('user') ]) ?>
+                </div>
+                <div class="col-6">
+                    <?= $form->text('password_confirmation', [ 'prepend' => $this->icon('password'), 'input_type' => 'password' ]) ?>
+                </div>
+                <div class="col-6">
+                    <?= $form->button('submit', [ 'button_class' => 'btn-success btn-block' ]) ?>
+                </div>
+            </div>
+            <?= $form->end() ?>
+        </div>
+    </div>
+    <div class="card text-white bg-dark" style="background-color: #333; border-color: #333;">
+
+        <div class="card-body">
+            <h2 class="card-title">Jak utworzyć silne hasło?</h2>
+            <ol>
+                <li>Hasło powinno mieć co najmniej 8 znaków.</li>
+                <li>Do budowania hasła dobrze jest stosować różnorodne znaki.</li>
+                <li>Należy używać takich słów i zwrotów, które będą dla nas łatwe do zapamiętania, a zarazem trudne do odgadnięcia przez inne osoby.</li>
+            </ol>
+
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,24 @@
+<?php
+/** @var \Main\View\Base $this */
+$form = $this->createBootstrapForm($this->loginForm);
+?>
+<h2 class="card-title">Mam już konto</h2>
+<?= $form->errors() ?>
+<?= $form->start() ?>
+
+    <div class="form-row">
+        <div class="col-6">
+            <?= $form->email('email', [ 'prepend' => $this->icon('user') ]) ?>
+        </div>
+        <div class="col-6">
+            <?= $form->password('password', [ 'prepend' => $this->icon('password') ]) ?>
+        </div>
+        <div class="col-6">
+            <?= $form->checkbox('remember') ?>
+        </div>
+        <div class="col-6">
+            <?= $form->button('submit', [ 'button_class' => 'btn-block btn-success' ]) ?>
+        </div>
+    </div>
+
+<?= $form->end() ?>

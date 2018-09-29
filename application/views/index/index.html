@@ -1,0 +1,21 @@
+<?php
+/** @var \Main\View\Base $this */
+
+/** @var \Main\Model\Game[] $userGames */
+$userGames = $this->userGames;
+
+/** @var \Main\Model\Game[] $openGames */
+$openGames = $this->openGames;
+?>
+
+<? if (count($userGames) > 0): ?>
+    <h2><?= $this->t('Twoje aktywne gry') ?></h2>
+    <?= $this->render('index/_games', [ 'games' => $userGames, ])?>
+<? endif; ?>
+
+<? if (count($openGames) > 0): ?>
+    <h2><?= $this->t('Gry oczekujące na graczy') ?></h2>
+    <?= $this->render('index/_games', [ 'games' => $openGames, ])?>
+<? endif; ?>
+
+<?= $this->linkTo($this->t('Utwórz nową rozgrywkę'), '/games/create', [ 'class' => 'btn btn-primary flaticon-add' ]) ?>

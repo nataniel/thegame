@@ -1,0 +1,7 @@
+<h4 class="card-title">lub zaloguj przez inne konto:</h4>
+<p class="small">
+    <?= $this->linkTo('Facebook', '/social/facebook', [ 'class' => 'btn btn-sm btn-facebook flaticon-facebook', 'role' => 'button', 'back' => $this->getRequest()->getQuery('back') ]) ?>
+    <?= $this->linkTo('Twitter', '/social/twitter', [ 'class' => 'btn btn-sm btn-twitter flaticon-twitter', 'role' => 'button', 'back' => $this->getRequest()->getQuery('back') ]) ?>
+    <?= $this->linkTo('Google', '/social/google', [ 'class' => 'btn btn-sm btn-google flaticon-google', 'role' => 'button', 'back' => $this->getRequest()->getQuery('back') ]) ?>
+    <?= $this->linkTo('Steam', '/social/steam', [ 'class' => 'btn btn-sm btn-steam flaticon-steam', 'role' => 'button', 'back' => $this->getRequest()->getQuery('back') ]) ?>
+</p>

@@ -1,0 +1,41 @@
+<?php
+/** @var \Main\View\Base $this */
+/** @var \Main\Model\Game $game */
+$game = $this->game;
+
+/** @var \Main\Model\Player $player */
+$player = $this->player;
+?>
+<table class="table table-sm" id="assetsUnits">
+    <thead>
+    <tr><th colspan="3"><?= $this->t('Jednostki wojskowe <small>/ max</small>') ?></th></tr>
+    </thead>
+    <tbody>
+    <? foreach ($player->getAvailableUnits() as $unit): ?>
+        <tr>
+
+            <td style="text-align: center; width: 32px;" class="text-muted">
+                <span data-toggle="tooltip-next" data-placement="right">
+                <?= $unit->canBeRecruited()
+                    ? $this->linkTo($this->icon('add'), 'games/recruit/' . $game->id() . '?type=' . $unit->getType())
+                    : $this->icon('add') ?>
+                </span>
+                <div class="tooltip-html"><?= $this->_('price', $unit) ?></div>
+            </td>
+
+            <td><?= $this->tag('span', [ 'title' => $this->t($unit->getDescription()) ], $this->t($unit->getName())) ?>:</td>
+            <td style="text-align: right; white-space: nowrap">
+                <?= $unit->getAmount() ?>
+                <small data-toggle="tooltip-next" data-placement="left"><?= sprintf('/ %d', $unit->maxAmount()) ?></small>
+                <div class="tooltip-html">
+                    <? foreach ($unit->capacityMap() as $class => $amount): ?>
+                        <? $asset = $player->getAssetByClass($class); ?>
+                        <?= sprintf('%s: %+d', $this->t($asset), $amount) ?><br />
+                    <? endforeach; ?>
+                </div>
+            </td>
+
+        </tr>
+    <? endforeach; ?>
+    </tbody>
+</table>

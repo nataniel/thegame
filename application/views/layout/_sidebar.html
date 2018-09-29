@@ -1,0 +1,21 @@
+<?php
+/** @var $this Main\View\Base */
+/** @var $user \Main\Model\User */
+$user = $this->getCurrentUser();
+?>
+<?php if (!empty($user)): ?>
+
+    <footer class="loggedIn">
+        <?= $this->_('avatar', $user, 50) ?>
+        <p>
+            <strong><?= $this->linkTo($user->getName(), $user) ?></strong> (<?= $user->getEmail() ?>)<br />
+            <?= $this->linkTo($this->t('Ustawienia'), '/account', [ 'class' => 'flaticon-cogwheel' ]) ?>
+            | <?= $this->linkTo($this->t('Wyloguj się'), '/security/logout', [ 'class' => 'flaticon-shutdown' ]) ?>
+        </p>
+    </footer>
+
+<? else: ?>
+
+    <p><?= $this->linkTo($this->t('Zaloguj się'), '/security/login', [ 'class' => 'flaticon-user' ]) ?></p>
+
+<? endif; ?>

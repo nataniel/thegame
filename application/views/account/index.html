@@ -1,0 +1,49 @@
+<?php
+/** @var $this Main\View\Base */
+/** @var $user \Main\Model\User */
+$user = $this->getCurrentUser();
+$profiles = $user->getProfiles();
+$form = $this->createBootstrapForm($this->editForm);
+?>
+<div class="card mb-3">
+    <div class="card-body">
+        <h2 class="card-title">Moje konto</h2>
+        <?= $form->errors() ?>
+        <?= $form->start() ?>
+        <div class="form-row">
+            <div class="col">
+                <?= $form->text('name', [ 'prepend' => $this->icon('user') ]) ?>
+            </div>
+            <div class="col">
+                <?= $form->email('email', [ 'prepend' => $this->icon('email') ]) ?>
+            </div>
+        </div>
+        <?= $form->text('avatar', [ 'prepend' => $this->icon('picture') ]) ?>
+    </div>
+    <div class="card-footer"><?= $form->button('submit') ?></div>
+    <?= $form->end() ?>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <h2 class="card-title">Połączone profile</h2>
+    </div>
+    <table class="table social">
+        <tbody>
+        <? foreach ($profiles as $i => $profile): ?>
+            <tr>
+                <th scope="row" class="<?= $profile->getType() ?>"><?= $this->icon($profile->getType()) ?> <?= $profile->getTypeName() ?></th>
+                <td><?= $profile->getProfileId() ?></td>
+                <td style="text-align: right"><?= $this->linkTo('usuń', 'account/profile/' . $profile->id(), [ 'class' => 'flaticon-delete btn btn-sm text-danger' ]) ?></td>
+            </tr>
+        <? endforeach; ?>
+        </tbody>
+    </table>
+    <div class="card-footer text-right small">
+        Połącz z: &nbsp;
+        <?= $this->linkTo('Facebook', '/social/facebook', [ 'class' => 'btn btn-facebook btn-sm flaticon-facebook', 'role' => 'button', 'back' => true ]) ?>
+        <?= $this->linkTo('Twitter', '/social/twitter', [ 'class' => 'btn btn-twitter btn-sm flaticon-twitter', 'role' => 'button', 'back' => true ]) ?>
+        <?= $this->linkTo('Google', '/social/google', [ 'class' => 'btn btn-google btn-sm flaticon-google', 'role' => 'button', 'back' => true ]) ?>
+        <?= $this->linkTo('Steam', '/social/steam', [ 'class' => 'btn btn-steam btn-sm flaticon-steam', 'role' => 'button', 'back' => true ]) ?>
+    </div>
+</div>

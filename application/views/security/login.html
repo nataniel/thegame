@@ -1,0 +1,29 @@
+<?php
+/** @var \Main\View\Base $this */
+?>
+<div class="card-group">
+
+    <div class="card text-white bg-dark" style="background-color: #333; border-color: #333;">
+        <div class="card-body">
+
+            <h2 class="card-title">Nie posiadasz konta?</h2>
+            <p class="card-text">Litwo! Ojczyzno moja! Ty jesteś jak zdrowie. Ile cię stracił. Dziś człowieka nie siedzi Rejtan żałośny po cichu. gdy zacność domu, i dalej mówił: Grzeczność nie decyduj i wzgląd na świecie ogar i rzekł: Dziś, nowym zwyczajem my na Ojczyzny łono. Tymczasem na trzykrólskie święta przesuwają w głównym sądzie.</p>
+
+            <?= $this->linkTo('Zarejestruj się', '/security/register', [ 'class' => 'btn btn-primary' ]) ?>
+
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <?= $this->render('security/_login') ?>
+        </div>
+        <div class="card-body">
+            <?= $this->render('security/_social') ?>
+        </div>
+        <div class="card-footer text-muted">
+            <p class="card-text">Zapomniałeś hasła? <?= $this->linkTo('Kliknij tutaj, aby je odzyskać', '/security/password') ?>.</p>
+        </div>
+    </div>
+
+</div>

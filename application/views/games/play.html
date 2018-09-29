@@ -1,0 +1,27 @@
+<?php
+/** @var \Main\View\Base $this */
+/** @var \Main\Model\Game $game */
+$game = $this->game;
+
+/** @var \Main\Model\Player $player */
+$player = $this->player;
+?>
+
+    <small class="float-xl-right small">
+        ( <?= $this->linkTo('restart', 'games/restart/' . $game->id()) ?>
+        | <?= $this->linkTo('zakończ', 'games/finish/' . $game->id()) ?> )
+    </small>
+    <h1 class="mb-2">
+        <?= '#' . $game->id() . ': ' . $game->getName() ?>
+        <small class="text-muted"><?= $this->t('game.status.' . $game->getCurrentStatus(), $game->getCurrentTurn()) ?></small>
+    </h1>
+
+<? if ($player->getCurrentPhase() == \Main\Model\Player::PHASE_EVENTRESOLUTION): ?>
+    <?= $this->render('games/play/_event') ?>
+<? endif; ?>
+
+<? if ($player->getCurrentPhase() == \Main\Model\Player::PHASE_ACTION): ?>
+    <?= $this->render('games/play/_assets') ?>
+    <?= $this->render('games/play/_actions') ?>
+    <?= $this->render('games/_players') ?>
+<? endif; ?>
