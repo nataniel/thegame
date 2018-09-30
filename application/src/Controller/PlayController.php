@@ -19,6 +19,17 @@ class PlayController extends AbstractController
         ];
     }
 
+    public function technologiesAction()
+    {
+        $server = $this->getGameServer();
+        $player = $server->getPlayer();
+
+        return [
+            'server' => $server,
+            'title' => sprintf('Rozgrywka: %s (#%d) - tura %d', $player->getUser(), $player->id(), $player->getCurrentTurn()),
+        ];
+    }
+
     public function recruitAction()
     {
         $type = $this->getRequest()->getQuery('type');
@@ -98,6 +109,23 @@ class PlayController extends AbstractController
 
             $server = $this->getGameServer();
             $server->endTurn()->save();
+
+        }
+        catch (Game\Exception $ex) {
+            $this->getView()->addFlash($ex->getMessage(), View::FLASH_ERROR);
+        }
+
+        return $this->redirectTo('/play');
+    }
+
+    public function resolveAction()
+    {
+        $option = $this->getRequest()->getQuery('option');
+
+        try {
+
+            $server = $this->getGameServer();
+            $server->resolve($option)->save();
 
         }
         catch (Game\Exception $ex) {

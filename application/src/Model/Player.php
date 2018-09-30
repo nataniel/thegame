@@ -11,6 +11,7 @@ use Main\Model\Player\Asset,
     Main\Model\Player\Building,
     Main\Model\Player\Supply,
     Main\Model\Player\Notification;
+use Main\Model\Player\Event;
 
 /**
  * @Entity
@@ -65,12 +66,12 @@ class Player extends Entity
      **/
     protected $notifications;
 
-//    /**
-//     * @var Event[]
-//     * @OneToMany(targetEntity="Main\Model\Player\Event", mappedBy="player", cascade={"all"})
-//     * @OrderBy({"turn" = "ASC"})
-//     **/
-//    protected $events;
+    /**
+     * @var Event[]
+     * @OneToMany(targetEntity="Main\Model\Player\Event", mappedBy="player", cascade={"all"})
+     * @OrderBy({"created_at" = "DESC"})
+     **/
+    protected $events;
 
     public function __construct($attributes = [])
     {
@@ -451,13 +452,31 @@ class Player extends Entity
      */
     public function productionPhase()
     {
-        $em = self::getEM();
-        $em->transactional(function ($em) {
-            $this->produceSupplies();
-            $this->developActiveTechnology();
-            $this->setNextTurn();
-        });
+        $this->produceSupplies();
+        $this->developActiveTechnology();
+        $this->setNextTurn();
+        $this->generateRandomEvent();
+        return $this;
+    }
 
+    /**
+     * @return $this
+     */
+    public function gameOver()
+    {
+        $event = new Player\Event\GameOver();
+        $this->_addTo('events', $event);
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    protected function generateRandomEvent()
+    {
+        $event = Player\Event::generateRandomEvent();
+        $this->_addTo('events', $event);
+        $event->init();
         return $this;
     }
 
@@ -536,14 +555,21 @@ class Player extends Entity
      */
     public function getCurrentEvent()
     {
-        $turn = $this->game->getCurrentTurn();
         foreach ($this->events as $event) {
-            if ($event->getTurn() == $turn) {
+            if (!$event->isFinished()) {
                 return $event;
             }
         }
 
         return null;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasCurrentEvent()
+    {
+        return !empty($this->getCurrentEvent());
     }
 
     /**

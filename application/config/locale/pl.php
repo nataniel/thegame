@@ -153,6 +153,10 @@ return [
                 'name' => 'Susza',
                 'description' => 'Wyjątkowo zła pogoda spowodowała słabe zbiory w tym roku.',
             ],
+            'gameover' => [
+                'name' => 'Game over',
+                'description' => 'Niestety, przegrałeś rozgrywkę.',
+            ],
         ],
 
         'phase' => [

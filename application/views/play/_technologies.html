@@ -13,7 +13,7 @@ $player = $this->player;
         <tr>
 
             <td>
-                <?= $this->linkTo($this->t($technology), '/play/develop?type=' . $technology->getType(), [ 'title' => $this->t($technology->getDescription()) ]) ?>
+                <?= $this->linkTo($this->t($technology), '/play/develop?type=' . $technology->getType(), [ 'title' => $this->t($technology->getDescription()) ]) ?><br />
                 <? if ($player->getActiveTechnology() === $technology): ?>
                     <div style="position: relative; margin-top: .3rem">
                         <? $progress = $player->getSupplyByType('science')->productionAmount() / $technology->getPriceScience() * \Main\Model\Player\Technology::PROGRESS_FULL ?>

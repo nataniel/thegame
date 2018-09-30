@@ -2,27 +2,29 @@
 namespace Main\Model\Player\Event;
 
 use Main\Model\Player\Event;
-use Main\Model\Player\Supply;
 
 /**
  * @Entity
  */
-class Drought extends Event
+class GameOver extends Event
 {
     protected function doInitialize()
     {
-        $this->applyResult([ Supply\Food::class => -1 ]);
         return $this;
     }
 
+    /**
+     * @param  int $option
+     * @return $this
+     */
     protected function doResolve($option)
     {
-        $this->setFinished();
+        // game over, can't do anything
         return $this;
     }
 
     public function getImage()
     {
-        return '//i.huffpost.com/gen/1998776/images/o-DROUGHT-facebook.jpg';
+        return '//lurkmore.so/images/3/3d/Restinpeaceripgraveyard.jpg';
     }
 }

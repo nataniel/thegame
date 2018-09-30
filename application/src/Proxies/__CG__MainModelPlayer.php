@@ -64,10 +64,10 @@ class Player extends \Main\Model\Player implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', 'user', 'current_phase', 'created_at', 'units', 'buildings', 'supplies', 'technologies', 'events', 'id', '_errors', '_readonly'];
+            return ['__isInitialized__', 'user', 'current_turn', 'created_at', 'units', 'buildings', 'supplies', 'technologies', 'notifications', 'events', 'id', '_errors', '_readonly'];
         }
 
-        return ['__isInitialized__', 'user', 'current_phase', 'created_at', 'units', 'buildings', 'supplies', 'technologies', 'events', 'id', '_errors', '_readonly'];
+        return ['__isInitialized__', 'user', 'current_turn', 'created_at', 'units', 'buildings', 'supplies', 'technologies', 'notifications', 'events', 'id', '_errors', '_readonly'];
     }
 
     /**
@@ -198,12 +198,12 @@ class Player extends \Main\Model\Player implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function getCurrentPhase()
+    public function getCurrentTurn()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCurrentPhase', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCurrentTurn', []);
 
-        return parent::getCurrentPhase();
+        return parent::getCurrentTurn();
     }
 
     /**
@@ -396,23 +396,23 @@ class Player extends \Main\Model\Player implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function beginTurnPhase()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'beginTurnPhase', []);
-
-        return parent::beginTurnPhase();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public function productionPhase()
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'productionPhase', []);
 
         return parent::productionPhase();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function gameOver()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'gameOver', []);
+
+        return parent::gameOver();
     }
 
     /**
@@ -429,34 +429,12 @@ class Player extends \Main\Model\Player implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function developmentPhase()
+    public function setNextTurn()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'developmentPhase', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setNextTurn', []);
 
-        return parent::developmentPhase();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function actionPhase()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'actionPhase', []);
-
-        return parent::actionPhase();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function endTurnPhase()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'endTurnPhase', []);
-
-        return parent::endTurnPhase();
+        return parent::setNextTurn();
     }
 
     /**
@@ -479,6 +457,17 @@ class Player extends \Main\Model\Player implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCurrentEvent', []);
 
         return parent::getCurrentEvent();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function hasCurrentEvent()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'hasCurrentEvent', []);
+
+        return parent::hasCurrentEvent();
     }
 
     /**

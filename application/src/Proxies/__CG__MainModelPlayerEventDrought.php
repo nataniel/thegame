@@ -64,10 +64,10 @@ class Drought extends \Main\Model\Player\Event\Drought implements \Doctrine\ORM\
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', 'player', 'random_seed', 'turn', 'is_resolved', 'created_at', 'result', 'id', '_errors', '_readonly'];
+            return ['__isInitialized__', 'player', 'random_seed', 'status', 'created_at', 'id', '_errors', '_readonly'];
         }
 
-        return ['__isInitialized__', 'player', 'random_seed', 'turn', 'is_resolved', 'created_at', 'result', 'id', '_errors', '_readonly'];
+        return ['__isInitialized__', 'player', 'random_seed', 'status', 'created_at', 'id', '_errors', '_readonly'];
     }
 
     /**
@@ -187,34 +187,35 @@ class Drought extends \Main\Model\Player\Event\Drought implements \Doctrine\ORM\
     /**
      * {@inheritDoc}
      */
-    public function process()
+    public function init()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'process', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'init', []);
 
-        return parent::process();
+        return parent::init();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function apply()
+    public function resolve($option)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'apply', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'resolve', [$option]);
 
-        return parent::apply();
+        return parent::resolve($option);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getResult()
+    public function applyResult($result = array (
+))
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getResult', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'applyResult', [$result]);
 
-        return parent::getResult();
+        return parent::applyResult($result);
     }
 
     /**
@@ -231,23 +232,34 @@ class Drought extends \Main\Model\Player\Event\Drought implements \Doctrine\ORM\
     /**
      * {@inheritDoc}
      */
-    public function getTurn()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getTurn', []);
-
-        return parent::getTurn();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public function isResolved()
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'isResolved', []);
 
         return parent::isResolved();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function isFinished()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'isFinished', []);
+
+        return parent::isFinished();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function isStatus($status)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'isStatus', [$status]);
+
+        return parent::isStatus($status);
     }
 
     /**

@@ -8,6 +8,7 @@ class Exception extends \E4u\Model\Exception
         USER_ALREADY_JOINED = 3,
         USER_IS_NOT_PLAYER = 4,
         GAME_NOT_LAUNCHED = 5,
+        UNRESOLVED_EVENT_EXISTS = 6,
 
         UKNOWN_EXCEPTION = 0;
 }

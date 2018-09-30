@@ -1,8 +1,10 @@
 <?php
 namespace Main\Model\Game;
 
+use E4u\Loader;
 use Main\Model\Player;
 use Main\Model\User;
+use Main\Model\Game;
 
 class Server
 {
@@ -49,7 +51,11 @@ class Server
      */
     public function save()
     {
-        $this->user->save();
+        $em = Loader::getDoctrine();
+        $em->transactional(function ($em) {
+            $this->user->save();
+        });
+
         return $this;
     }
 
@@ -62,11 +68,27 @@ class Server
     }
 
     /**
+     * @return Player\Event|null
+     */
+    public function getCurrentEvent()
+    {
+        return $this->getPlayer()->getCurrentEvent();
+    }
+
+    private function checkForUnresolvedEvents()
+    {
+        if ($this->getPlayer()->hasCurrentEvent()) {
+            throw new Game\Exception('Istnieją nie rozwiązane wydarzenia.', Game\Exception::UNRESOLVED_EVENT_EXISTS);
+        }
+    }
+
+    /**
      * @param  string $type
      * @return Player\Unit
      */
     public function recruit($type)
     {
+        $this->checkForUnresolvedEvents();
         $unit = $this->getPlayer()->getUnitByType($type);
         $unit->recruit();
         return $unit;
@@ -78,6 +100,7 @@ class Server
      */
     public function build($type)
     {
+        $this->checkForUnresolvedEvents();
         $building = $this->getPlayer()->getBuildingByType($type);
         $building->build();
         return $building;
@@ -89,6 +112,7 @@ class Server
      */
     public function develop($type)
     {
+        $this->checkForUnresolvedEvents();
         $technology = $this->getPlayer()->getTechnologyByType($type);
         $technology->setActive();
         return $technology;
@@ -99,7 +123,19 @@ class Server
      */
     public function endTurn()
     {
+        $this->checkForUnresolvedEvents();
         $this->getPlayer()->productionPhase();
+        return $this;
+    }
+
+    /**
+     * @param  int $option
+     * @return $this
+     */
+    public function resolve($option)
+    {
+        $event = $this->getCurrentEvent();
+        $event->resolve($option);
         return $this;
     }
 }

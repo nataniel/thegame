@@ -16,6 +16,12 @@ class Notification extends Entity
      */
     protected $player;
 
+    /** @Column(type="string") */
+    protected $message;
+
+    /** @Column(type="string") */
+    protected $type;
+
     /** @Column(type="datetime") */
     protected $created_at;
 
@@ -25,6 +31,22 @@ class Notification extends Entity
     public function getPlayer()
     {
         return $this->player;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMessage()
+    {
+        return $this->message;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 
     /**
