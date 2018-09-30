@@ -15,7 +15,7 @@ class PlayController extends AbstractController
 
         return [
             'server' => $server,
-            'title' => sprintf('Rozgrywka: %s (#%d)', $player->getUser(), $player->id()),
+            'title' => sprintf('Rozgrywka: %s (#%d) - tura %d', $player->getUser(), $player->id(), $player->getCurrentTurn()),
         ];
     }
 
@@ -83,6 +83,21 @@ class PlayController extends AbstractController
                 $message,
                 $this->t($technology->getName()),
                 $this->t($technology->getDescription())), View::FLASH_SUCCESS);
+
+        }
+        catch (Game\Exception $ex) {
+            $this->getView()->addFlash($ex->getMessage(), View::FLASH_ERROR);
+        }
+
+        return $this->redirectTo('/play');
+    }
+
+    public function endTurnAction()
+    {
+        try {
+
+            $server = $this->getGameServer();
+            $server->endTurn()->save();
 
         }
         catch (Game\Exception $ex) {

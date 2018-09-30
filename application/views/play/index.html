@@ -10,7 +10,14 @@ $player = $server->getPlayer();
         <?= $this->render('play/_assets', [ 'player' => $player ]) ?>
     </div>
     <div class="card-footer">
-        <?= $this->linkTo($this->t('Zakończ rozgrywkę'), '/games/remove', [ 'class' => 'btn btn-danger flaticon-delete mr-2' ]) ?>
-        <?= $this->linkTo($this->t('Rozpocznij od nowa'), '/games/reset', [ 'class' => 'btn btn-warning flaticon-delete mr-2' ]) ?>
+        <div class="row">
+            <div class="col">
+                <?= $this->linkTo($this->t('Zakończ turę'), '/play/end-turn', [ 'class' => 'btn btn-success flaticon-success' ]) ?>
+            </div>
+            <div class="col text-right">
+                <?= $this->linkTo($this->t('Zakończ rozgrywkę'), '/games/remove', [ 'class' => 'btn btn-danger flaticon-delete ml-2' ]) ?>
+                <?= $this->linkTo($this->t('Rozpocznij od nowa'), '/games/reset', [ 'class' => 'btn btn-warning flaticon-delete ml-2' ]) ?>
+            </div>
+        </div>
     </div>
 </div>

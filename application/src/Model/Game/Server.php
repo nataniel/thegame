@@ -93,4 +93,12 @@ class Server
         return $technology;
     }
 
+    /**
+     * @return $this
+     */
+    public function endTurn()
+    {
+        $this->getPlayer()->productionPhase();
+        return $this;
+    }
 }

@@ -13,7 +13,7 @@ final class Version20180929174134 extends AbstractMigration
             'CREATE TABLE players (
                 id INT AUTO_INCREMENT NOT NULL,
                 user_id INT DEFAULT NULL,
-                current_phase INT DEFAULT NULL,
+                current_turn INT NOT NULL,
                 created_at DATETIME NOT NULL,
                 INDEX IDX_264E43A6A76ED395 (user_id),
                 PRIMARY KEY(id))

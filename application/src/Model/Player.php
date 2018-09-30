@@ -4,7 +4,7 @@ namespace Main\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityRepository;
 use E4u\Model\Entity;
-use Main\Model\Game\Exception;
+use Main\Model\Game;
 
 use Main\Model\Player\Asset,
     Main\Model\Player\Technology,
@@ -19,22 +19,14 @@ use Main\Model\Player\Asset,
  */
 class Player extends Entity
 {
-    const
-        PHASE_BEGINTURN = 10,
-        PHASE_PRODUCTION = 20,
-        PHASE_EVENTRESOLUTION = 30,
-        PHASE_DEVELOPMENT = 40,
-        PHASE_ACTION = 50,
-        PHASE_ENDTURN = 100;
-
     /**
      * @var User
      * @OneToOne(targetEntity="Main\Model\User", inversedBy="player")
      */
     protected $user;
 
-    /** @Column(type="integer", nullable=true) */
-    protected $current_phase;
+    /** @Column(type="integer") */
+    protected $current_turn = 1;
 
     /** @Column(type="datetime") */
     protected $created_at;
@@ -115,9 +107,9 @@ class Player extends Entity
     /**
      * @return int
      */
-    public function getCurrentPhase()
+    public function getCurrentTurn()
     {
-        return $this->current_phase;
+        return $this->current_turn;
     }
 
     /**
@@ -295,7 +287,7 @@ class Player extends Entity
             return $this->getTechnologyByType($class);
         }
 
-        throw new Exception(sprintf('Invalid asset / technology classname: %s.', $class));
+        throw new Game\Exception(sprintf('Invalid asset / technology classname: %s.', $class));
     }
 
     /**
@@ -451,26 +443,13 @@ class Player extends Entity
     /**
      * @return $this
      */
-    public function beginTurnPhase()
-    {
-        $this->changeCurrentPhase(self::PHASE_BEGINTURN, self::PHASE_ENDTURN);
-        return $this;
-    }
-
-    /**
-     * @return $this
-     */
     public function productionPhase()
     {
         $em = self::getEM();
         $em->transactional(function ($em) {
-            if ($this->changeCurrentPhase(self::PHASE_PRODUCTION, self::PHASE_BEGINTURN)) {
-
-                // no production on 1st turn
-                if ($this->game->getCurrentTurn() > 1) {
-                    $this->produceSupplies();
-                }
-            }
+            $this->produceSupplies();
+            $this->developActiveTechnology();
+            $this->setNextTurn();
         });
 
         return $this;
@@ -499,73 +478,6 @@ class Player extends Entity
     /**
      * @return $this
      */
-    public function developmentPhase()
-    {
-        $em = self::getEM();
-        $em->transactional(function ($em) {
-            if ($this->changeCurrentPhase(self::PHASE_DEVELOPMENT, self::PHASE_EVENTRESOLUTION)) {
-
-                // no development on 1st turn
-                if ($this->game->getCurrentTurn() > 1) {
-                    $this->addScienceToActiveTechnology();
-                }
-            }
-        });
-
-        return $this;
-    }
-
-    /**
-     * @return $this
-     */
-    public function actionPhase()
-    {
-        $this->changeCurrentPhase(self::PHASE_ACTION, self::PHASE_DEVELOPMENT);
-        return $this;
-    }
-
-    /**
-     * @return $this
-     */
-    public function endTurnPhase()
-    {
-        $this->changeCurrentPhase(self::PHASE_ENDTURN, self::PHASE_ACTION);
-        return $this;
-    }
-
-    /**
-     * @param  int $next_phase
-     * @param  int $previous_phase
-     * @return bool
-     */
-    protected function changeCurrentPhase($next_phase, $previous_phase = null)
-    {
-        if ($next_phase == $this->current_phase) {
-            return false;
-        }
-
-        if (!is_null($this->current_phase) && !is_null($previous_phase)
-            && ($this->current_phase != $previous_phase)) {
-            throw new Game\Exception(sprintf('Invalid phase request (%d -> %d) for %s.', $this->current_phase, $next_phase, $this->showEntity()));
-        }
-
-        $this->setCurrentPhase($next_phase);
-        return true;
-    }
-
-    /**
-     * @param  int $current_phase
-     * @return $this
-     */
-    protected function setCurrentPhase($current_phase)
-    {
-        $this->current_phase = $current_phase;
-        return $this;
-    }
-
-    /**
-     * @return $this
-     */
     private function produceSupplies()
     {
         foreach ($this->getAvailableSupplies() as $supply) {
@@ -578,15 +490,29 @@ class Player extends Entity
     /**
      * @return $this
      */
-    private function addScienceToActiveTechnology()
+    private function developActiveTechnology()
     {
         $technology = $this->getActiveTechnology();
-        if (empty($technology)) {
-            return $this;
+        if (empty($technology) || $technology->isDeveloped()) {
+            throw new Game\Exception('Wybierz technologię do rozwoju.');
         }
 
         $science = $this->getSupplyByType(Supply\Science::class)->productionAmount();
         $technology->setActive()->addScience($science);
+
+        if ($technology->isDeveloped()) {
+            $technology->setActive(null);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setNextTurn()
+    {
+        $this->current_turn += 1;
         return $this;
     }
 
