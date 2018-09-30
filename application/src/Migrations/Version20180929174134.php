@@ -80,23 +80,6 @@ final class Version20180929174134 extends AbstractMigration
                 ENGINE = InnoDB',
             'ALTER TABLE players_technologies 
              ADD CONSTRAINT FK_24E10CF099E6F5DF FOREIGN KEY (player_id) REFERENCES players (id)',
-
-            'CREATE TABLE players_events (
-                id INT AUTO_INCREMENT NOT NULL,
-                player_id INT DEFAULT NULL,
-                random_seed INT NOT NULL,
-                turn INT NOT NULL,
-                is_resolved TINYINT(1) NOT NULL,
-                created_at DATETIME NOT NULL,
-                type VARCHAR(255) NOT NULL,
-                INDEX IDX_6599389599E6F5DF (player_id),
-                UNIQUE INDEX player_turn (player_id, turn),
-                PRIMARY KEY(id))
-                DEFAULT CHARACTER SET utf8
-                COLLATE utf8_unicode_ci
-                ENGINE = InnoDB',
-            'ALTER TABLE players_events
-             ADD CONSTRAINT FK_6599389599E6F5DF FOREIGN KEY (player_id) REFERENCES players (id)',
         ]);
 
     }

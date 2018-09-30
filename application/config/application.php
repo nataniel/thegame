@@ -12,7 +12,5 @@ return [
     ],
 
     'console' => [
-        'game:server' => \Main\Model\Game\Server::class,
-        'bootstrap4:compile' => \Main\Tools\Bootstrap4::class,
     ],
 ];

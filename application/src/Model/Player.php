@@ -2,7 +2,6 @@
 namespace Main\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\EntityRepository;
 use E4u\Model\Entity;
 use Main\Model\Game;
 
@@ -11,7 +10,7 @@ use Main\Model\Player\Asset,
     Main\Model\Player\Unit,
     Main\Model\Player\Building,
     Main\Model\Player\Supply,
-    Main\Model\Player\Event;
+    Main\Model\Player\Notification;
 
 /**
  * @Entity
@@ -60,11 +59,18 @@ class Player extends Entity
     protected $technologies;
 
     /**
-     * @var Event[]
-     * @OneToMany(targetEntity="Main\Model\Player\Event", mappedBy="player", cascade={"all"})
-     * @OrderBy({"turn" = "ASC"})
+     * @var Notification[]
+     * @OneToMany(targetEntity="Main\Model\Player\Notification", mappedBy="player", cascade={"all"})
+     * @OrderBy({"created_at" = "ASC"})
      **/
-    protected $events;
+    protected $notifications;
+
+//    /**
+//     * @var Event[]
+//     * @OneToMany(targetEntity="Main\Model\Player\Event", mappedBy="player", cascade={"all"})
+//     * @OrderBy({"turn" = "ASC"})
+//     **/
+//    protected $events;
 
     public function __construct($attributes = [])
     {

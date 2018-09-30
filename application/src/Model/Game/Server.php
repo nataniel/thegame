@@ -39,6 +39,7 @@ class Server
      */
     public function destroyPlayer()
     {
+        $this->user->getPlayer()->destroy();
         $this->user->setPlayer(null);
         return $this;
     }

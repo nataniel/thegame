@@ -9,8 +9,7 @@ use Main\Model\Game;
 /**
  * @Entity
  * @Table(name="players_technologies", uniqueConstraints={
- *      @UniqueConstraint(name="player_type", columns={"player_id", "type"}),
- *      @UniqueConstraint(name="player_active", columns={"player_id", "active"})
+ *      @UniqueConstraint(name="player_type", columns={"player_id", "type"})
  * })
  * @InheritanceType("SINGLE_TABLE")
  * @DiscriminatorColumn(name="type", type="string")
