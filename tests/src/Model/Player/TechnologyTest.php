@@ -45,7 +45,6 @@ class TechnologyTest extends TestCase
      * @covers Technology::canBeDeveloped()
      * @covers Technology::prospectiveTechnologies()
      * @param  Technology $technology
-     * @return Technology\Gathering
      */
     public function testCanBeDeveloped(Technology $technology)
     {

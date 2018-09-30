@@ -13,25 +13,14 @@ use Zend\Mail\Address\AddressInterface;
  */
 class User extends E4uUser implements AddressInterface
 {
-    const AVATAR_PATH = 'repository/users/';
-
     /** @Column(type="string") */
     protected $first_name = '';
 
     /** @Column(type="string") */
     protected $last_name = '';
 
-    /** @Column(type="string") */
-    protected $description = '';
-
-    /** @Column(type="string") */
-    protected $remote_addr = '';
-
-    /** @Column(type="string") */
-    protected $remote_host = '';
-
     /** @Column(type="string", nullable=true) */
-    protected $locale;
+    protected $locale = 'pl';
 
     /**
      * @var User\Profile[]
@@ -40,11 +29,17 @@ class User extends E4uUser implements AddressInterface
     protected $profiles;
 
     /**
-     * @var User\Preference[]
-     * @OneToMany(targetEntity="Main\Model\User\Preference", mappedBy="user", cascade={"all"}, indexBy="name", orphanRemoval=true)
+     * @var User\Property[]
+     * @OneToMany(targetEntity="Main\Model\User\Property", mappedBy="user", cascade={"all"}, indexBy="name", orphanRemoval=true)
      * @OrderBy({"name" = "ASC"})
      **/
-    protected $preferences;
+    protected $properties;
+
+    /**
+     * @var Player
+     * @OneToOne(targetEntity="Main\Model\Player", mappedBy="user", cascade={"all"}, orphanRemoval=true)
+     **/
+    protected $player;
 
     /**
      * @param  string $email
@@ -110,10 +105,10 @@ class User extends E4uUser implements AddressInterface
      * @param string $default
      * @return string
      */
-    public function getPreference($name, $default = '')
+    public function getProperty($name, $default = '')
     {
-        return isset($this->preferences[$name])
-            ? (string)$this->preferences[$name]
+        return isset($this->properties[ $name ])
+            ? (string)$this->properties[ $name ]
             : $default;
     }
 
@@ -122,13 +117,13 @@ class User extends E4uUser implements AddressInterface
      * @param  string $value
      * @return $this
      */
-    public function setPreference($name, $value)
+    public function setProperty($name, $value)
     {
-        if (isset($this->preferences[$name])) {
-            $this->preferences[$name]->setValue($value);
+        if (isset($this->properties[ $name ])) {
+            $this->properties[ $name ]->setValue($value);
         }
         else {
-            $this->_addTo('preferences', [
+            $this->_addTo('properties', [
                 'name' => $name,
                 'value' => $value,
             ]);
@@ -190,11 +185,11 @@ class User extends E4uUser implements AddressInterface
     }
 
     /**
-     * @return User\Preference[]
+     * @return User\Property[]
      */
-    public function getPreferences()
+    public function getProperties()
     {
-        return $this->preferences;
+        return $this->properties;
     }
     
     public function getFirstName()
@@ -207,17 +202,12 @@ class User extends E4uUser implements AddressInterface
         return $this->last_name;
     }
 
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
     /**
      * @return Image|null
      */
     public function getAvatar()
     {
-        $avatar = $this->getPreference(User\Preference::AVATAR);
+        $avatar = $this->getProperty(User\Property::AVATAR);
         if (!empty($avatar)) {
 
             if (strpos($avatar, 'http://') === 0 ||
@@ -226,7 +216,6 @@ class User extends E4uUser implements AddressInterface
                 return new Image($avatar);
             }
 
-            return new Image(self::AVATAR_PATH . $avatar);
         }
 
         return null;
@@ -238,7 +227,7 @@ class User extends E4uUser implements AddressInterface
      */
     public function setAvatar($avatar)
     {
-        $this->setPreference(User\Preference::AVATAR, (string)$avatar);
+        $this->setProperty(User\Property::AVATAR, (string)$avatar);
         return $this;
     }
 
@@ -293,5 +282,24 @@ class User extends E4uUser implements AddressInterface
     public function toString()
     {
         return $this->getEmail();
+    }
+
+    /**
+     * @return Player
+     */
+    public function getPlayer()
+    {
+        return $this->player;
+    }
+
+    /**
+     * @param  Player $player
+     * @param  bool $keepConsistency
+     * @return $this
+     */
+    public function setPlayer($player, $keepConsistency = true)
+    {
+        $this->_set('player', $player, $keepConsistency);
+        return $this;
     }
 }

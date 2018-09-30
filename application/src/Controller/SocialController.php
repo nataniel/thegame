@@ -8,6 +8,8 @@ use Main\Model\User;
 
 class SocialController extends AbstractController
 {
+    protected $requiredPrivileges = [ ];
+
     public function googleAction()
     {
         $helper = new Social\Google(Configuration::googleConfig(), $this->getRequest());

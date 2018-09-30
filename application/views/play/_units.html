@@ -1,8 +1,5 @@
 <?php
 /** @var \Main\View\Base $this */
-/** @var \Main\Model\Game $game */
-$game = $this->game;
-
 /** @var \Main\Model\Player $player */
 $player = $this->player;
 ?>
@@ -17,7 +14,7 @@ $player = $this->player;
             <td style="text-align: center; width: 32px;" class="text-muted">
                 <span data-toggle="tooltip-next" data-placement="right">
                 <?= $unit->canBeRecruited()
-                    ? $this->linkTo($this->icon('add'), 'games/recruit/' . $game->id() . '?type=' . $unit->getType())
+                    ? $this->linkTo($this->icon('add'), '/play/recruit?type=' . $unit->getType())
                     : $this->icon('add') ?>
                 </span>
                 <div class="tooltip-html"><?= $this->_('price', $unit) ?></div>

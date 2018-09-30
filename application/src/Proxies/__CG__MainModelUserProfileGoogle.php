@@ -466,6 +466,17 @@ class Google extends \Main\Model\User\Profile\Google implements \Doctrine\ORM\Pr
     /**
      * {@inheritDoc}
      */
+    public function setUpdatedNow()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUpdatedNow', []);
+
+        return parent::setUpdatedNow();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function valid()
     {
 

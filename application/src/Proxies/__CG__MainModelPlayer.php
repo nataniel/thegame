@@ -64,10 +64,10 @@ class Player extends \Main\Model\Player implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', 'game', 'user', 'current_phase', 'position', 'created_at', 'units', 'buildings', 'supplies', 'technologies', 'events', 'id', '_errors', '_readonly'];
+            return ['__isInitialized__', 'user', 'current_phase', 'created_at', 'units', 'buildings', 'supplies', 'technologies', 'events', 'id', '_errors', '_readonly'];
         }
 
-        return ['__isInitialized__', 'game', 'user', 'current_phase', 'position', 'created_at', 'units', 'buildings', 'supplies', 'technologies', 'events', 'id', '_errors', '_readonly'];
+        return ['__isInitialized__', 'user', 'current_phase', 'created_at', 'units', 'buildings', 'supplies', 'technologies', 'events', 'id', '_errors', '_readonly'];
     }
 
     /**
@@ -176,6 +176,17 @@ class Player extends \Main\Model\Player implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
+    public function reset()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'reset', []);
+
+        return parent::reset();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getUser()
     {
 
@@ -187,34 +198,23 @@ class Player extends \Main\Model\Player implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function getGame()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getGame', []);
-
-        return parent::getGame();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getPosition()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getPosition', []);
-
-        return parent::getPosition();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public function getCurrentPhase()
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCurrentPhase', []);
 
         return parent::getCurrentPhase();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setTechnologies($technologies)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setTechnologies', [$technologies]);
+
+        return parent::setTechnologies($technologies);
     }
 
     /**
@@ -374,6 +374,17 @@ class Player extends \Main\Model\Player implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
+    public function getTotalStrength()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getTotalStrength', []);
+
+        return parent::getTotalStrength();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getBuildingLimit()
     {
 
@@ -396,6 +407,17 @@ class Player extends \Main\Model\Player implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
+    public function productionPhase()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'productionPhase', []);
+
+        return parent::productionPhase();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function eventResolutionPhase()
     {
 
@@ -407,12 +429,12 @@ class Player extends \Main\Model\Player implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function productionPhase()
+    public function developmentPhase()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'productionPhase', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'developmentPhase', []);
 
-        return parent::productionPhase();
+        return parent::developmentPhase();
     }
 
     /**
@@ -435,6 +457,17 @@ class Player extends \Main\Model\Player implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'endTurnPhase', []);
 
         return parent::endTurnPhase();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getProductionAmountOf($supplyClass)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getProductionAmountOf', [$supplyClass]);
+
+        return parent::getProductionAmountOf($supplyClass);
     }
 
     /**
@@ -703,6 +736,17 @@ class Player extends \Main\Model\Player implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'postUpdate', []);
 
         return parent::postUpdate();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setUpdatedNow()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUpdatedNow', []);
+
+        return parent::setUpdatedNow();
     }
 
     /**

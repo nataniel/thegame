@@ -1,9 +1,9 @@
 <?php
 return [
     'game.status' => [
-        \Main\Model\Game::STATUS_WAITING => 'oczekuje na graczy',
-        \Main\Model\Game::STATUS_STARTED => 'w trakcie rozgrywki (tura&nbsp;%d)',
-        \Main\Model\Game::STATUS_FINISHED => 'zakończona',
+//        \Main\Model\Game::STATUS_WAITING => 'oczekuje na graczy',
+//        \Main\Model\Game::STATUS_STARTED => 'w trakcie rozgrywki (tura&nbsp;%d)',
+//        \Main\Model\Game::STATUS_FINISHED => 'zakończona',
     ],
 
     'player' => [
@@ -156,12 +156,12 @@ return [
         ],
 
         'phase' => [
-            \Main\Model\Player::PHASE_BEGINTURN => 'początek tury',
-            \Main\Model\Player::PHASE_PRODUCTION => 'faza produkcji',
-            \Main\Model\Player::PHASE_EVENTRESOLUTION => 'rozpatrywanie wydarzenia',
-            \Main\Model\Player::PHASE_DEVELOPMENT => 'wynajdowanie technologii',
-            \Main\Model\Player::PHASE_ACTION => 'faza akcji',
-            \Main\Model\Player::PHASE_ENDTURN => 'oczekuje na koniec tury',
+//            \Main\Model\Player::PHASE_BEGINTURN => 'początek tury',
+//            \Main\Model\Player::PHASE_PRODUCTION => 'faza produkcji',
+//            \Main\Model\Player::PHASE_EVENTRESOLUTION => 'rozpatrywanie wydarzenia',
+//            \Main\Model\Player::PHASE_DEVELOPMENT => 'wynajdowanie technologii',
+//            \Main\Model\Player::PHASE_ACTION => 'faza akcji',
+//            \Main\Model\Player::PHASE_ENDTURN => 'oczekuje na koniec tury',
         ],
     ],
 ];

@@ -209,6 +209,17 @@ class Mining extends \Main\Model\Player\Technology\Mining implements \Doctrine\O
     /**
      * {@inheritDoc}
      */
+    public function availableTechnologies()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'availableTechnologies', []);
+
+        return parent::availableTechnologies();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function canBeDeveloped()
     {
 
@@ -571,6 +582,17 @@ class Mining extends \Main\Model\Player\Technology\Mining implements \Doctrine\O
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'postUpdate', []);
 
         return parent::postUpdate();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setUpdatedNow()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUpdatedNow', []);
+
+        return parent::setUpdatedNow();
     }
 
     /**

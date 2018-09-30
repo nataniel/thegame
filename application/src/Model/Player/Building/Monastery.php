@@ -1,5 +1,6 @@
 <?php
 namespace Main\Model\Player\Building;
+
 use Main\Model\Player\Building,
     Main\Model\Player\Supply,
     Main\Model\Player\Technology;

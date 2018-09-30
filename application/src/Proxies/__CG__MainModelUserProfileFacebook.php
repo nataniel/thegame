@@ -466,6 +466,17 @@ class Facebook extends \Main\Model\User\Profile\Facebook implements \Doctrine\OR
     /**
      * {@inheritDoc}
      */
+    public function setUpdatedNow()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUpdatedNow', []);
+
+        return parent::setUpdatedNow();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function valid()
     {
 

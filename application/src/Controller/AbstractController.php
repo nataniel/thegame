@@ -7,6 +7,7 @@ use Main\Model\User;
 
 abstract class AbstractController extends E4uController
 {
+    protected $requiredPrivileges = true;
     protected $defaultLayout = 'layout/default';
     protected $viewClass = \Main\View\Base::class;
 

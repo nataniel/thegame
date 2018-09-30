@@ -14,11 +14,8 @@ use Main\Model\Player\Asset,
     Main\Model\Player\Event;
 
 /**
- * @Entity(repositoryClass="Main\Model\Player\Repository")
- * @Table(name="players", uniqueConstraints={
- *     @UniqueConstraint(name="game_user", columns={"game_id", "user_id"}),
- *     @UniqueConstraint(name="game_position", columns={"game_id", "position"})
- * })
+ * @Entity
+ * @Table(name="players")
  */
 class Player extends Entity
 {
@@ -31,22 +28,13 @@ class Player extends Entity
         PHASE_ENDTURN = 100;
 
     /**
-     * @var Game
-     * @ManyToOne(targetEntity="Main\Model\Game", inversedBy="players")
-     */
-    protected $game;
-
-    /**
      * @var User
-     * @ManyToOne(targetEntity="Main\Model\User")
+     * @OneToOne(targetEntity="Main\Model\User", inversedBy="player")
      */
     protected $user;
 
     /** @Column(type="integer", nullable=true) */
     protected $current_phase;
-
-    /** @Column(type="integer", nullable=true) */
-    protected $position;
 
     /** @Column(type="datetime") */
     protected $created_at;
@@ -86,28 +74,42 @@ class Player extends Entity
      **/
     protected $events;
 
+    public function __construct($attributes = [])
+    {
+        if ($attributes instanceof User) {
+            $attributes = [ 'user' => $attributes ];
+        }
+
+        parent::__construct($attributes);
+        $this->initAssets();
+    }
+
+    /**
+     * @return $this
+     */
+    protected function initAssets()
+    {
+        $this->setTechnologies([ new Technology\Gathering([ 'developed' => true ]) ]);
+        $this->getSupplyByType(Supply\Food::class)->setAmount(Supply\Food::STARTING_AMOUNT);
+        $this->getSupplyByType(Supply\Wood::class)->setAmount(Supply\Wood::STARTING_AMOUNT);
+        $this->getUnitByType(Unit\Warrior::class)->setAmount(Unit\Warrior::STARTING_AMOUNT);
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function reset()
+    {
+        return $this;
+    }
+
     /**
      * @return User
      */
     public function getUser()
     {
         return $this->user;
-    }
-
-    /**
-     * @return Game
-     */
-    public function getGame()
-    {
-        return $this->game;
-    }
-
-    /**
-     * @return int
-     */
-    public function getPosition()
-    {
-        return $this->position;
     }
 
     /**
@@ -505,7 +507,7 @@ class Player extends Entity
 
                 // no development on 1st turn
                 if ($this->game->getCurrentTurn() > 1) {
-                    $this->developActiveTechnology();
+                    $this->addScienceToActiveTechnology();
                 }
             }
         });
@@ -576,7 +578,7 @@ class Player extends Entity
     /**
      * @return $this
      */
-    private function developActiveTechnology()
+    private function addScienceToActiveTechnology()
     {
         $technology = $this->getActiveTechnology();
         if (empty($technology)) {
@@ -621,10 +623,13 @@ class Player extends Entity
     }
 
     /**
-     * @return Player\Repository|EntityRepository
+     * @param  User $user
+     * @return null|Player
      */
-    public static function getRepository()
+    public static function findByUser(User $user)
     {
-        return parent::getRepository();
+        /** @var Player $player */
+        $player = self::getRepository()->findOneBy([ 'user' => $user ]);
+        return $player;
     }
 }

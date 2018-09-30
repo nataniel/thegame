@@ -9,8 +9,8 @@ use Main\Model\Game;
 /**
  * @Entity
  * @Table(name="players_technologies", uniqueConstraints={
- *     @UniqueConstraint(name="player_type", columns={"player_id", "type"}),
- *     @UniqueConstraint(name="player_active", columns={"player_id", "active"})
+ *      @UniqueConstraint(name="player_type", columns={"player_id", "type"}),
+ *      @UniqueConstraint(name="player_active", columns={"player_id", "active"})
  * })
  * @InheritanceType("SINGLE_TABLE")
  * @DiscriminatorColumn(name="type", type="string")
@@ -22,7 +22,7 @@ abstract class Technology extends Entity
 
     /**
      * @var Player
-     * @ManyToOne(targetEntity="Main\Model\Player", inversedBy="technologies", cascade={"persist"})
+     * @ManyToOne(targetEntity="Main\Model\Player", inversedBy="technologies")
      */
     protected $player;
 

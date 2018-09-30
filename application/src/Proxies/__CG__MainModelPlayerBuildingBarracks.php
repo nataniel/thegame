@@ -242,6 +242,17 @@ class Barracks extends \Main\Model\Player\Building\Barracks implements \Doctrine
     /**
      * {@inheritDoc}
      */
+    public function getDescription()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getDescription', []);
+
+        return parent::getDescription();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getPlayer()
     {
 
@@ -516,6 +527,17 @@ class Barracks extends \Main\Model\Player\Building\Barracks implements \Doctrine
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'postUpdate', []);
 
         return parent::postUpdate();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setUpdatedNow()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUpdatedNow', []);
+
+        return parent::setUpdatedNow();
     }
 
     /**

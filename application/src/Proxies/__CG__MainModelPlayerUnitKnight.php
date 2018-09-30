@@ -187,12 +187,67 @@ class Knight extends \Main\Model\Player\Unit\Knight implements \Doctrine\ORM\Pro
     /**
      * {@inheritDoc}
      */
+    public function getUpkeep()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUpkeep', []);
+
+        return parent::getUpkeep();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function capacityMap()
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'capacityMap', []);
 
         return parent::capacityMap();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getStrength()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getStrength', []);
+
+        return parent::getStrength();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getRange()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getRange', []);
+
+        return parent::getRange();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getDefense()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getDefense', []);
+
+        return parent::getDefense();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getSpeed()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getSpeed', []);
+
+        return parent::getSpeed();
     }
 
     /**
@@ -259,6 +314,17 @@ class Knight extends \Main\Model\Player\Unit\Knight implements \Doctrine\ORM\Pro
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getName', []);
 
         return parent::getName();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getDescription()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getDescription', []);
+
+        return parent::getDescription();
     }
 
     /**
@@ -538,6 +604,17 @@ class Knight extends \Main\Model\Player\Unit\Knight implements \Doctrine\ORM\Pro
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'postUpdate', []);
 
         return parent::postUpdate();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setUpdatedNow()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUpdatedNow', []);
+
+        return parent::setUpdatedNow();
     }
 
     /**

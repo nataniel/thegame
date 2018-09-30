@@ -1,8 +1,5 @@
 <?php
 /** @var \Main\View\Base $this */
-/** @var \Main\Model\Game $game */
-$game = $this->game;
-
 /** @var \Main\Model\Player $player */
 $player = $this->player;
 ?>
@@ -16,7 +13,7 @@ $player = $this->player;
         <tr>
 
             <td>
-                <?= $this->linkTo($this->t($technology), 'games/develop/' . $game->id() . '?type=' . $technology->getType(), [ 'title' => $this->t($technology->getDescription()) ]) ?>
+                <?= $this->linkTo($this->t($technology), '/play/develop?type=' . $technology->getType(), [ 'title' => $this->t($technology->getDescription()) ]) ?>
                 <? if ($player->getActiveTechnology() === $technology): ?>
                     <div style="position: relative; margin-top: .3rem">
                         <? $progress = $player->getSupplyByType('science')->productionAmount() / $technology->getPriceScience() * \Main\Model\Player\Technology::PROGRESS_FULL ?>
@@ -52,7 +49,7 @@ $player = $this->player;
     </tbody>
     <tfoot>
     <tr>
-        <td colspan="2" class="small">(<?= $this->linkTo($this->t('zobacz wynalezione technologie'), 'games/technologies/' . $game->id(), [ 'class' => 'text-muted' ]) ?>)</td>
+        <td colspan="2" class="small">(<?= $this->linkTo($this->t('zobacz wynalezione technologie'), '/play/technologies', [ 'class' => 'text-muted' ]) ?>)</td>
     </tr>
     </tfoot>
 </table>

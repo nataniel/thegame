@@ -5,6 +5,7 @@ use E4u\Application\Controller\Errors as E4uErrors;
 
 class ErrorsController extends AbstractController implements E4uErrors
 {
+    protected $requiredPrivileges = [ ];
     protected $defaultLayout = 'layout/security';
 
     public function notFoundAction()

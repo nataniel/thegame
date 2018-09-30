@@ -6,8 +6,6 @@ use Main\Model\User;
 
 class AccountController extends AbstractController
 {
-    protected $requiredPrivileges = true;
-
     public function indexAction()
     {
         $editForm = new EditUser($this->getRequest(), [ 'user' => $this->getCurrentUser(), ], 'edit');

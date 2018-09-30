@@ -253,6 +253,17 @@ class Gold extends \Main\Model\Player\Supply\Gold implements \Doctrine\ORM\Proxy
     /**
      * {@inheritDoc}
      */
+    public function getDescription()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getDescription', []);
+
+        return parent::getDescription();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getPlayer()
     {
 
@@ -538,6 +549,17 @@ class Gold extends \Main\Model\Player\Supply\Gold implements \Doctrine\ORM\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'postUpdate', []);
 
         return parent::postUpdate();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setUpdatedNow()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUpdatedNow', []);
+
+        return parent::setUpdatedNow();
     }
 
     /**

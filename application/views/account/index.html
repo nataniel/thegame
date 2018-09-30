@@ -5,7 +5,7 @@ $user = $this->getCurrentUser();
 $profiles = $user->getProfiles();
 $form = $this->createBootstrapForm($this->editForm);
 ?>
-<div class="card mb-3">
+<div class="card">
     <div class="card-body">
         <h2 class="card-title">Moje konto</h2>
         <?= $form->errors() ?>

@@ -253,6 +253,17 @@ class Stone extends \Main\Model\Player\Supply\Stone implements \Doctrine\ORM\Pro
     /**
      * {@inheritDoc}
      */
+    public function getDescription()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getDescription', []);
+
+        return parent::getDescription();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getPlayer()
     {
 
@@ -538,6 +549,17 @@ class Stone extends \Main\Model\Player\Supply\Stone implements \Doctrine\ORM\Pro
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'postUpdate', []);
 
         return parent::postUpdate();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setUpdatedNow()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUpdatedNow', []);
+
+        return parent::setUpdatedNow();
     }
 
     /**

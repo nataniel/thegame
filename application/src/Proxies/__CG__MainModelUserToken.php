@@ -488,6 +488,17 @@ class Token extends \Main\Model\User\Token implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
+    public function setUpdatedNow()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUpdatedNow', []);
+
+        return parent::setUpdatedNow();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function valid()
     {
 

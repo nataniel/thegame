@@ -1,5 +1,6 @@
 <?php
 namespace Main\Model\Player\Supply;
+
 use Main\Model\Player\Supply,
     Main\Model\Player\Unit,
     Main\Model\Player\Building,
@@ -10,6 +11,8 @@ use Main\Model\Player\Supply,
  */
 class Wood extends Supply
 {
+    const STARTING_AMOUNT = 2;
+
     /**
      * @return int[]
      */

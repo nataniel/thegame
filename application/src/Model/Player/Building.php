@@ -12,11 +12,11 @@ use Main\Model\Game;
  * @InheritanceType("SINGLE_TABLE")
  * @DiscriminatorColumn(name="type", type="string")
  * @DiscriminatorMap({
- *      "barracks" = "\Main\Model\Player\Building\Barracks",
- *      "farm" = "\Main\Model\Player\Building\Farm",
- *      "forester" = "\Main\Model\Player\Building\Forester",
- *      "library" = "\Main\Model\Player\Building\Library",
- *      "mine" = "\Main\Model\Player\Building\Mine",
+ *      "barracks"  = "\Main\Model\Player\Building\Barracks",
+ *      "farm"      = "\Main\Model\Player\Building\Farm",
+ *      "forester"  = "\Main\Model\Player\Building\Forester",
+ *      "library"   = "\Main\Model\Player\Building\Library",
+ *      "mine"      = "\Main\Model\Player\Building\Mine",
  *      "monastery" = "\Main\Model\Player\Building\Monastery"
  * })
  */
@@ -24,7 +24,7 @@ abstract class Building extends Asset
 {
     /**
      * @var Player
-     * @ManyToOne(targetEntity="Main\Model\Player", inversedBy="buildings", cascade={"persist"})
+     * @ManyToOne(targetEntity="Main\Model\Player", inversedBy="buildings")
      */
     protected $player;
 

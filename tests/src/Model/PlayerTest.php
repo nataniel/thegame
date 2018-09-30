@@ -3,7 +3,6 @@ namespace MainTest\Model;
 
 use PHPUnit\Framework\TestCase;
 use Main\Model\Player,
-    Main\Model\Game,
     Main\Model\User;
 
 use Main\Model\Player\Building,
@@ -19,28 +18,14 @@ use Main\Model\Player\Building,
 class PlayerTest extends TestCase
 {
     /**
-     * @covers Player::getGame()
-     * @covers Player::setGame()
-     */
-    public function testGetGame()
-    {
-        $player = new Player([ 'game' => new Game(), ]);
-        $this->assertInstanceOf(Game::class, $player->getGame());
-        $this->assertCount(1, $player->getGame()->getPlayers());
-    }
-
-    /**
      * @covers Player::getUnits()
      * @covers Player::getUnitByType()
      */
     public function testGetUnits()
     {
-        $player = new Player([ 'game' => new Game(), 'user' => new User() ]);
-        $player->getUnitByType('archer');
-        $this->assertCount(1, $player->getUnits());
-
-        new Player\Unit\Warrior([ 'player' => $player, ]);
-        $this->assertCount(2, $player->getUnits());
+        $player = new Player([ 'user' => new User() ]);
+        $this->assertEquals(Unit\Warrior::STARTING_AMOUNT, $player->getUnitByType('warrior')->getAmount());
+        $this->assertEquals(0, $player->getUnitByType('archer')->getAmount());
     }
 
     /**
@@ -49,18 +34,14 @@ class PlayerTest extends TestCase
      */
     public function testGetBuildings()
     {
-        $player = new Player([ 'game' => new Game(), 'user' => new User() ]);
+        $player = new Player([ 'user' => new User() ]);
+        $this->assertEquals(0,
+            $player->getBuildingByType(Building\Barracks::class)->getAmount());
+
+
         $player->getBuildingByType('farm')->setAmount(2);
         $this->assertEquals(2,
-            $player->getBuildingByType(Player\Building\Farm::class)->getAmount());
-
-        $assets = $player->getBuildings();
-        $this->assertCount(1, $assets);
-
-        new Player\Building\Barracks([ 'player' => $player, 'amount' => 2 ]);
-        $this->assertEquals(2,
-            $player->getBuildingByType(Player\Building\Barracks::class)->getAmount());
-        $this->assertCount(2, $assets);
+            $player->getBuildingByType(Building\Farm::class)->getAmount());
     }
 
     /**
@@ -69,18 +50,13 @@ class PlayerTest extends TestCase
      */
     public function testGetSupplies()
     {
-        $player = new Player([ 'game' => new Game(), 'user' => new User() ]);
+        $player = new Player([ 'user' => new User() ]);
         $player->getSupplyByType('food')->setAmount(10);
         $this->assertEquals(10,
-            $player->getSupplyByType(Player\Supply\Food::class)->getAmount());
+            $player->getSupplyByType(Supply\Food::class)->getAmount());
 
-        $assets = $player->getSupplies();
-        $this->assertCount(1, $assets);
-
-        new Player\Supply\Gold([ 'player' => $player, 'amount' => 5 ]);
-        $this->assertCount(2, $assets);
-        $this->assertEquals(5,
-            $player->getSupplyByType(Player\Supply\Gold::class)->getAmount());
+        $this->assertEquals(0,
+            $player->getSupplyByType(Supply\Gold::class)->getAmount());
     }
 
     /**
@@ -137,6 +113,6 @@ class PlayerTest extends TestCase
     public function testGetTotalStrength()
     {
         $player = new Player();
-        $this->assertEquals(0, $player->getTotalStrength());
+        $this->assertEquals(2, $player->getTotalStrength());
     }
 }

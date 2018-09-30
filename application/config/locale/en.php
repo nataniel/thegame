@@ -1,9 +1,9 @@
 <?php
 return [
     'game.status' => [
-        \Main\Model\Game::STATUS_WAITING => 'waiting for players',
-        \Main\Model\Game::STATUS_STARTED => 'currently playing (turn&nbsp;%d)',
-        \Main\Model\Game::STATUS_FINISHED => 'finished',
+//        \Main\Model\Game::STATUS_WAITING => 'waiting for players',
+//        \Main\Model\Game::STATUS_STARTED => 'currently playing (turn&nbsp;%d)',
+//        \Main\Model\Game::STATUS_FINISHED => 'finished',
     ],
 
     'player' => [
@@ -99,12 +99,12 @@ return [
         ],
 
         'phase' => [
-            \Main\Model\Player::PHASE_BEGINTURN => 'beginning of turn',
-            \Main\Model\Player::PHASE_PRODUCTION => 'production phase',
-            \Main\Model\Player::PHASE_EVENTRESOLUTION => 'event resolution',
-            \Main\Model\Player::PHASE_DEVELOPMENT => 'technology development',
-            \Main\Model\Player::PHASE_ACTION => 'action phase',
-            \Main\Model\Player::PHASE_ENDTURN => 'waiting for end turn',
+//            \Main\Model\Player::PHASE_BEGINTURN => 'beginning of turn',
+//            \Main\Model\Player::PHASE_PRODUCTION => 'production phase',
+//            \Main\Model\Player::PHASE_EVENTRESOLUTION => 'event resolution',
+//            \Main\Model\Player::PHASE_DEVELOPMENT => 'technology development',
+//            \Main\Model\Player::PHASE_ACTION => 'action phase',
+//            \Main\Model\Player::PHASE_ENDTURN => 'waiting for end turn',
         ],
     ],
 

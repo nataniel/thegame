@@ -7,15 +7,20 @@ class IndexController extends AbstractController
 {
     public function indexAction()
     {
-        $userGames = ($user = $this->getCurrentUser())
-            ? Game::getRepository()->findActiveByUser($user)
-            : [];
-
-        $openGames = Game::getRepository()->findAllOpen();
+        $server = $this->getGameServer();
+        $player = $server->getPlayer();
 
         return [
-            'userGames' => $userGames,
-            'openGames' => $openGames,
+            'player' => $player,
         ];
+    }
+
+    /**
+     * @return Game\Server
+     */
+    private function getGameServer()
+    {
+        $user = $this->getCurrentUser();
+        return new Game\Server($user);
     }
 }

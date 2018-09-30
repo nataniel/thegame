@@ -1,5 +1,6 @@
 <?php
 namespace Main\Model\Player;
+
 use E4u\Exception\LogicException;
 use Main\Model\Player;
 use Main\Model\Game;
@@ -11,9 +12,9 @@ use Main\Model\Game;
  * @InheritanceType("SINGLE_TABLE")
  * @DiscriminatorColumn(name="type", type="string")
  * @DiscriminatorMap({
- *      "archer" = "\Main\Model\Player\Unit\Archer",
- *      "cleric" = "\Main\Model\Player\Unit\Cleric",
- *      "knight" = "\Main\Model\Player\Unit\Knight",
+ *      "archer"  = "\Main\Model\Player\Unit\Archer",
+ *      "cleric"  = "\Main\Model\Player\Unit\Cleric",
+ *      "knight"  = "\Main\Model\Player\Unit\Knight",
  *      "warrior" = "\Main\Model\Player\Unit\Warrior"
  * })
  */
@@ -21,7 +22,7 @@ abstract class Unit extends Asset
 {
     /**
      * @var Player
-     * @ManyToOne(targetEntity="Main\Model\Player", inversedBy="units", cascade={"persist"})
+     * @ManyToOne(targetEntity="Main\Model\Player", inversedBy="units")
      */
     protected $player;
 

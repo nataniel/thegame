@@ -466,6 +466,17 @@ class Twitter extends \Main\Model\User\Profile\Twitter implements \Doctrine\ORM\
     /**
      * {@inheritDoc}
      */
+    public function setUpdatedNow()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUpdatedNow', []);
+
+        return parent::setUpdatedNow();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function valid()
     {
 

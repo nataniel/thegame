@@ -64,10 +64,10 @@ class User extends \Main\Model\User implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', 'first_name', 'last_name', 'description', 'remote_addr', 'remote_host', 'locale', 'profiles', 'preferences', 'groups', 'login', 'encrypted_password', 'active', 'created_at', 'updated_at', 'id', '_errors', '_readonly'];
+            return ['__isInitialized__', 'first_name', 'last_name', 'locale', 'profiles', 'properties', 'player', 'login', 'encrypted_password', 'active', 'created_at', 'updated_at', 'id', '_errors', '_readonly'];
         }
 
-        return ['__isInitialized__', 'first_name', 'last_name', 'description', 'remote_addr', 'remote_host', 'locale', 'profiles', 'preferences', 'groups', 'login', 'encrypted_password', 'active', 'created_at', 'updated_at', 'id', '_errors', '_readonly'];
+        return ['__isInitialized__', 'first_name', 'last_name', 'locale', 'profiles', 'properties', 'player', 'login', 'encrypted_password', 'active', 'created_at', 'updated_at', 'id', '_errors', '_readonly'];
     }
 
     /**
@@ -242,23 +242,23 @@ class User extends \Main\Model\User implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function getPreference($name, $default = '')
+    public function getProperty($name, $default = '')
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getPreference', [$name, $default]);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getProperty', [$name, $default]);
 
-        return parent::getPreference($name, $default);
+        return parent::getProperty($name, $default);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function setPreference($name, $value)
+    public function setProperty($name, $value)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setPreference', [$name, $value]);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setProperty', [$name, $value]);
 
-        return parent::setPreference($name, $value);
+        return parent::setProperty($name, $value);
     }
 
     /**
@@ -297,12 +297,12 @@ class User extends \Main\Model\User implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function getPreferences()
+    public function getProperties()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getPreferences', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getProperties', []);
 
-        return parent::getPreferences();
+        return parent::getProperties();
     }
 
     /**
@@ -330,17 +330,6 @@ class User extends \Main\Model\User implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function getDescription()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getDescription', []);
-
-        return parent::getDescription();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public function getAvatar()
     {
 
@@ -363,72 +352,6 @@ class User extends \Main\Model\User implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function getGroups()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getGroups', []);
-
-        return parent::getGroups();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setGroups($ids)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setGroups', [$ids]);
-
-        return parent::setGroups($ids);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function addToGroup($id)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addToGroup', [$id]);
-
-        return parent::addToGroup($id);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function delFromGroup($id)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'delFromGroup', [$id]);
-
-        return parent::delFromGroup($id);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function isInGroup($id)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'isInGroup', [$id]);
-
-        return parent::isInGroup($id);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function belongsTo($groupId)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'belongsTo', [$groupId]);
-
-        return parent::belongsTo($groupId);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public function toUrl()
     {
 
@@ -440,12 +363,12 @@ class User extends \Main\Model\User implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function addToProfiles($profile)
+    public function addToProfiles($profile, $keepConsistency = true)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addToProfiles', [$profile]);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addToProfiles', [$profile, $keepConsistency]);
 
-        return parent::addToProfiles($profile);
+        return parent::addToProfiles($profile, $keepConsistency);
     }
 
     /**
@@ -462,12 +385,34 @@ class User extends \Main\Model\User implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function isBlocked()
+    public function toString()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'isBlocked', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'toString', []);
 
-        return parent::isBlocked();
+        return parent::toString();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getPlayer()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getPlayer', []);
+
+        return parent::getPlayer();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setPlayer($player, $keepConsistency = true)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setPlayer', [$player, $keepConsistency]);
+
+        return parent::setPlayer($player, $keepConsistency);
     }
 
     /**

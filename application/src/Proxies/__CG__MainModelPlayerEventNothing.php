@@ -64,10 +64,10 @@ class Nothing extends \Main\Model\Player\Event\Nothing implements \Doctrine\ORM\
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', 'player', 'seed', 'turn', 'is_resolved', 'created_at', 'result', 'id', '_errors', '_readonly'];
+            return ['__isInitialized__', 'player', 'random_seed', 'turn', 'is_resolved', 'created_at', 'result', 'id', '_errors', '_readonly'];
         }
 
-        return ['__isInitialized__', 'player', 'seed', 'turn', 'is_resolved', 'created_at', 'result', 'id', '_errors', '_readonly'];
+        return ['__isInitialized__', 'player', 'random_seed', 'turn', 'is_resolved', 'created_at', 'result', 'id', '_errors', '_readonly'];
     }
 
     /**
@@ -527,6 +527,17 @@ class Nothing extends \Main\Model\Player\Event\Nothing implements \Doctrine\ORM\
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'postUpdate', []);
 
         return parent::postUpdate();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setUpdatedNow()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUpdatedNow', []);
+
+        return parent::setUpdatedNow();
     }
 
     /**

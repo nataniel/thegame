@@ -67,3 +67,7 @@
 tr.collapse.in {
     display: table-row;
 }
+
+.card {
+    margin-bottom: 1rem;
+}

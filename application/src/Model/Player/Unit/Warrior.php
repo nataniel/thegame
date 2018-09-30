@@ -1,5 +1,6 @@
 <?php
 namespace Main\Model\Player\Unit;
+
 use Main\Model\Player\Supply,
     Main\Model\Player\Unit,
     Main\Model\Player\Building,
@@ -12,6 +13,7 @@ class Warrior extends Unit
 {
     const PRICE_FOOD = 5;
     const UPKEEP_FOOD = 1;
+    const STARTING_AMOUNT = 1;
 
     /**
      * @param  int $amount

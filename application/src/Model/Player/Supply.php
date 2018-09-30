@@ -22,7 +22,7 @@ abstract class Supply extends Asset
 {
     /**
      * @var Player
-     * @ManyToOne(targetEntity="Main\Model\Player", inversedBy="supplies", cascade={"persist"})
+     * @ManyToOne(targetEntity="Main\Model\Player", inversedBy="supplies")
      */
     protected $player;
 

@@ -6,15 +6,15 @@ use Main\Model\User;
 
 /**
  * @Entity
- * @Table(name="users_preferences")
+ * @Table(name="users_properties")
  */
-class Preference extends Entity
+class Property extends Entity
 {
     const AVATAR = 'avatar';
 
     /**
      * @var User
-     * @ManyToOne(targetEntity="Main\Model\User", inversedBy="preferences")
+     * @ManyToOne(targetEntity="Main\Model\User", inversedBy="properties")
      */
     protected $user;
 
@@ -42,7 +42,7 @@ class Preference extends Entity
 
     /**
      * @param  mixed $value
-     * @return Preference
+     * @return Property
      */
     public function setValue($value)
     {

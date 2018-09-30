@@ -47,32 +47,22 @@ class UserTest extends TestCase
     }
 
     /**
-     * @covers User::getPreference()
-     * @covers User::setPreference()
+     * @covers User::getProperty()
+     * @covers User::setProperty()
      */
-    public function testPreferences()
+    public function testProperties()
     {
         $user = new User([
-            'preferences' => [
+            'properties' => [
                 [ 'name' => 'test', 'value' => 1, ],
                 [ 'name' => 'avatar', 'value' => 'img.jpg', ],
             ],
         ]);
 
-        $this->assertEquals(1, $user->getPreference('test'));
-        $this->assertEmpty($user->getPreference('not-existing'));
+        $this->assertEquals(1, $user->getProperty('test'));
+        $this->assertEmpty($user->getProperty('not-existing'));
 
-        $user->setPreference('acme', '#yolo');
-        $this->assertEquals('#yolo', $user->getPreference('acme'));
-    }
-
-    /**
-     * @covers User::isInGroup()
-     */
-    public function testIsInGroup()
-    {
-        $user = new User([ 'groups' => [ User\Group::ADMINISTRATORZY ]]);
-        $this->assertTrue($user->isInGroup(User\Group::ADMINISTRATORZY));
-        $this->assertFalse($user->isInGroup(User\Group::ZAREJESTROWANI_UZYTKOWNICY));
+        $user->setProperty('acme', '#yolo');
+        $this->assertEquals('#yolo', $user->getProperty('acme'));
     }
 }

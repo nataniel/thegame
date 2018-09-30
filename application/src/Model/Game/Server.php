@@ -1,33 +1,96 @@
 <?php
 namespace Main\Model\Game;
 
-use E4u\Tools\Console;
-use Main\Model\Game;
+use Main\Model\Player;
+use Main\Model\User;
 
-class Server extends Console\Base
+class Server
 {
-    const HELP = 'Starts';
-    private $stopSignal = false;
+    /** @var User */
+    protected $user;
 
-    public function execute()
+    public function __construct(User $user)
     {
-        while (!$this->stopSignal) {
-            $games = Game::getRepository()->findAllStarted();
-
-            $cnt = count($games);
-            foreach ($games as $game) {
-                if ($game->tryNextTurn()) {
-                    # echo sprintf("\n\nNEXT TURN (%d) STARTED: %s\n\n", $game->getCurrentTurn(), $game->showEntity());
-                    $game->save();
-                }
-
-                echo sprintf("\r%s - %d active games, ", date('d.m.Y H:i:s'), $cnt);
-                echo sprintf('memory usage: %.2f', memory_get_usage(true) / 1048576) . " MB    ";
-            }
-
-            \E4u\Loader::getDoctrine()->clear();
-            sleep(1);
-        }
-
+        $this->user = $user;
     }
+
+    /**
+     * @return $this
+     */
+    public function resetGame()
+    {
+        $this->destroyPlayer();
+        $this->createPlayer();
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function createPlayer()
+    {
+        $this->user->setPlayer(new Player());
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function destroyPlayer()
+    {
+        $this->user->setPlayer(null);
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function save()
+    {
+        $this->user->save();
+        return $this;
+    }
+
+    /**
+     * @return Player
+     */
+    public function getPlayer()
+    {
+        return $this->user->getPlayer();
+    }
+
+    /**
+     * @param  string $type
+     * @return Player\Unit
+     */
+    public function recruit($type)
+    {
+        $unit = $this->getPlayer()->getUnitByType($type);
+        $unit->recruit();
+        return $unit;
+    }
+
+    /**
+     * @param  string $type
+     * @return Player\Building
+     */
+    public function build($type)
+    {
+        $building = $this->getPlayer()->getBuildingByType($type);
+        $building->build();
+        return $building;
+    }
+
+    /**
+     * @param  string $type
+     * @return Player\Technology
+     */
+    public function develop($type)
+    {
+        $technology = $this->getPlayer()->getTechnologyByType($type);
+        $technology->setActive();
+        return $technology;
+    }
+
 }
