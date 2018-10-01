@@ -16,12 +16,7 @@ class Nothing extends Event
 
     protected function doResolve($option)
     {
+        $this->setFinished();
         return $this;
     }
-
-    public function getImage()
-    {
-        return '//i.ytimg.com/vi/SrydkUYUoYo/maxresdefault.jpg';
-    }
-
 }

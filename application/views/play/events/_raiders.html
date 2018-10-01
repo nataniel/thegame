@@ -1,0 +1,52 @@
+<?php
+/** @var \Main\View\Base $this */
+/** @var \Main\Model\Player\Event\Raiders $event */
+$event = $this->event;
+if (empty($event)) {
+    return false;
+}
+?>
+<div class="card">
+    <div class="card-body alert-warning">
+        <div class="row">
+            <div class="col">
+                <h2 class="card-title"><?= $this->t($event->getName()) ?></h2>
+                <p class="lead"><?= $this->t($event->getDescription()) ?></p>
+
+                <?php if (!$event->isResolved()): ?>
+                    <hr />
+                    <h3 class="card-title">Wybierz jedną z opcji:</h3>
+                    <ul>
+                        <li>
+                            - Do boju dzielni wojowie! Odeprzemy tę zarazę!
+                            <?= $this->linkTo('Walcz w obronie grodu', '/play/resolve?option=1', [ 'class' => 'btn btn-danger btn-sm', ]) ?>
+                        </li>
+
+
+                        <li>
+                            - Panowie, jakoś się dogadamy...
+                            <?= $this->linkTo('Zapłać okup', '/play/resolve?option=2', [ 'class' => 'btn btn-success btn-sm', ]) ?>
+                        </li>
+
+
+                        <li>
+                            - Kto żyw niech uchodzi do boru, przeczekamy tam aż sobie pójdą!
+                            <?= $this->linkTo('Wycofaj ludzi do lasu', '/play/resolve?option=3', [ 'class' => 'btn btn-warning btn-sm', ]) ?>
+                        </li>
+                    </ul>
+
+                <?php endif; ?>
+
+            </div>
+            <div class="col">
+                <?= $this->image('//66.media.tumblr.com/3ad6158c2bae0cf726539d6974ed6d5a/tumblr_o8s37xqzTF1tdy0nco1_500.gif', $event->getName(), [ 'style' => 'width: 100%' ])?>
+            </div>
+        </div>
+    </div>
+
+    <?php if ($event->isResolved()): ?>
+        <div class="card-footer">
+            <?= $this->linkTo('Przejdź do fazy akcji', '/play/resolve', [ 'class' => 'btn btn-primary', ]) ?>
+        </div>
+    <?php endif; ?>
+</div>

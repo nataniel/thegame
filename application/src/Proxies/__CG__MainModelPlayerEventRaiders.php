@@ -176,17 +176,6 @@ class Raiders extends \Main\Model\Player\Event\Raiders implements \Doctrine\ORM\
     /**
      * {@inheritDoc}
      */
-    public function getImage()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getImage', []);
-
-        return parent::getImage();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public function init()
     {
 

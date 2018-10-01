@@ -6,5 +6,5 @@ $event = $server->getCurrentEvent();
 $player = $server->getPlayer();
 ?>
 <?= $event
-    ? $this->render('play/_event', [ 'event' => $event ])
+    ? $this->render('play/events/_' . $event->getType(), [ 'event' => $event ])
     : $this->render('play/_actions', [ 'player' => $player ]) ?>

@@ -9,7 +9,7 @@ use Main\Model\Game;
 /**
  * @Entity
  */
-class Barbarians extends Event
+class Raiders extends Event
 {
     protected function doInitialize()
     {
@@ -23,8 +23,16 @@ class Barbarians extends Event
                 $this->fight();
                 break;
 
+            case 2:
+                $this->pay();
+                break;
+
+            case 3:
+                $this->flee();
+                break;
+
             default:
-                throw new Game\Exception('Wybierz opcję walki z barbarzyńcami.');
+                throw new Game\Exception('Wybierz opcję walki z grabieżcami.');
                 break;
         }
 
@@ -37,6 +45,20 @@ class Barbarians extends Event
     {
         // - Do boju dzielni wojowie! Odeprzemy tę zarazę!
         $this->applyResult([ Unit\Warrior::class => -1 ]);
+        return $this;
+    }
+
+    protected function pay()
+    {
+        // - Panowie, jakoś się dogadamy...
+        $this->applyResult([ Unit\Warrior::class => rand(-2, 0) ]);
+        return $this;
+    }
+
+    protected function flee()
+    {
+        // - Kto żyw niech uchodzi do boru, przeczekamy tam aż sobie pójdą!
+        $this->applyResult();
         return $this;
     }
 }

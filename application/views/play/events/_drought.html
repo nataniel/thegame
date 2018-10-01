@@ -1,0 +1,25 @@
+<?php
+/** @var \Main\View\Base $this */
+/** @var \Main\Model\Player\Event\Drought $event */
+$event = $this->event;
+if (empty($event)) {
+    return false;
+}
+?>
+<div class="card">
+    <div class="card-body alert-warning">
+        <div class="row">
+            <div class="col">
+                <h2 class="card-title"><?= $this->t($event->getName()) ?></h2>
+                <p class="lead"><?= $this->t($event->getDescription()) ?></p>
+
+            </div>
+            <div class="col">
+                <?= $this->image('//i.huffpost.com/gen/1998776/images/o-DROUGHT-facebook.jpg', $event->getName(), [ 'style' => 'width: 100%' ])?>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <?= $this->linkTo('Przejdź do fazy akcji', '/play/resolve', [ 'class' => 'btn btn-primary', ]) ?>
+    </div>
+</div>

@@ -199,7 +199,7 @@ abstract class Event extends Entity
     {
         switch (rand(0,2)) {
             case 1:  return new Event\Drought();
-            case 2:  return new Event\Barbarians();
+            case 2:  return new Event\Raiders();
             default: return new Event\Nothing();
         }
     }

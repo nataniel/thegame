@@ -176,17 +176,6 @@ class GameOver extends \Main\Model\Player\Event\GameOver implements \Doctrine\OR
     /**
      * {@inheritDoc}
      */
-    public function getImage()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getImage', []);
-
-        return parent::getImage();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public function init()
     {
 

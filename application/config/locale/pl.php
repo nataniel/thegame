@@ -145,9 +145,13 @@ return [
                 'name' => 'Nic się nie dzieje',
                 'description' => 'Cisza i spokój.',
             ],
+            'raiders' => [
+                'name' => 'Grabieże',
+                'description' => 'Twój gród został zaatakowany przez bandy grabieżców!',
+            ],
             'barbarians' => [
-                'name' => 'Atak barbarzyńców',
-                'description' => 'Twój gród został zaatakowany przez dzikie hordy barbarzyńców!',
+                'name' => 'Barbarzyńcy',
+                'description' => 'Twój gród został zaatakowany przez hordy barbarzyńców!',
             ],
             'drought' => [
                 'name' => 'Susza',

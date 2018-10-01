@@ -22,9 +22,4 @@ class GameOver extends Event
         // game over, can't do anything
         return $this;
     }
-
-    public function getImage()
-    {
-        return '//lurkmore.so/images/3/3d/Restinpeaceripgraveyard.jpg';
-    }
 }

@@ -17,12 +17,8 @@ class Drought extends Event
 
     protected function doResolve($option)
     {
+        $this->applyResult([ Supply\Food::class => -1 ]);
         $this->setFinished();
         return $this;
-    }
-
-    public function getImage()
-    {
-        return '//i.huffpost.com/gen/1998776/images/o-DROUGHT-facebook.jpg';
     }
 }
