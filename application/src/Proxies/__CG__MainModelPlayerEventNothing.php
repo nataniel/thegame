@@ -64,10 +64,10 @@ class Nothing extends \Main\Model\Player\Event\Nothing implements \Doctrine\ORM\
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', 'player', 'random_seed', 'status', 'created_at', 'id', '_errors', '_readonly'];
+            return ['__isInitialized__', 'status', 'player', 'random_seed', 'created_at', 'id', '_errors', '_readonly'];
         }
 
-        return ['__isInitialized__', 'player', 'random_seed', 'status', 'created_at', 'id', '_errors', '_readonly'];
+        return ['__isInitialized__', 'status', 'player', 'random_seed', 'created_at', 'id', '_errors', '_readonly'];
     }
 
     /**
@@ -176,23 +176,23 @@ class Nothing extends \Main\Model\Player\Event\Nothing implements \Doctrine\ORM\
     /**
      * {@inheritDoc}
      */
-    public function init()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'init', []);
-
-        return parent::init();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public function resolve($option)
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'resolve', [$option]);
 
         return parent::resolve($option);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function isResolutionOptionAvailable($option)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'isResolutionOptionAvailable', [$option]);
+
+        return parent::isResolutionOptionAvailable($option);
     }
 
     /**

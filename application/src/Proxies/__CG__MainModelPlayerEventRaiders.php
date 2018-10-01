@@ -176,12 +176,12 @@ class Raiders extends \Main\Model\Player\Event\Raiders implements \Doctrine\ORM\
     /**
      * {@inheritDoc}
      */
-    public function init()
+    public function isResolutionOptionAvailable($option)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'init', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'isResolutionOptionAvailable', [$option]);
 
-        return parent::init();
+        return parent::isResolutionOptionAvailable($option);
     }
 
     /**

@@ -176,23 +176,23 @@ class GameOver extends \Main\Model\Player\Event\GameOver implements \Doctrine\OR
     /**
      * {@inheritDoc}
      */
-    public function init()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'init', []);
-
-        return parent::init();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public function resolve($option)
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'resolve', [$option]);
 
         return parent::resolve($option);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function isResolutionOptionAvailable($option)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'isResolutionOptionAvailable', [$option]);
+
+        return parent::isResolutionOptionAvailable($option);
     }
 
     /**
