@@ -42,15 +42,6 @@ abstract class Event extends Entity
     /**
      * @return $this
      */
-    public function init()
-    {
-        $this->doInitialize();
-        return $this;
-    }
-
-    /**
-     * @return $this
-     */
     protected function generateRandomSeed()
     {
         $this->random_seed = function_exists('random_int')
@@ -65,10 +56,6 @@ abstract class Event extends Entity
      */
     public function resolve($option)
     {
-        if ($this->isFinished()) {
-            throw new Game\Exception('To wydarzenie zostało już rozwiązane.');
-        }
-
         if ($this->isResolved()) {
             $this->setFinished();
             return $this;
@@ -81,10 +68,18 @@ abstract class Event extends Entity
 
     /**
      * @param  int $option
+     * @return bool
+     */
+    public function isResolutionOptionAvailable($option)
+    {
+        return true;
+    }
+
+    /**
+     * @param  int $option
      * @return $this
      */
     abstract protected function doResolve($option);
-    abstract protected function doInitialize();
 
     /**
      * @param  array $result
@@ -121,7 +116,7 @@ abstract class Event extends Entity
      */
     public function isResolved()
     {
-        return $this->status == self::RESOLVED;
+        return $this->status >= self::RESOLVED;
     }
 
     /**

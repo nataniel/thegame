@@ -3,6 +3,8 @@
 /** @var \Main\Model\Game\Server $server */
 $server = $this->server;
 $event = $server->getCurrentEvent();
-$player = $server->getPlayer();
+if (empty($event)) {
+    return false;
+}
 ?>
-<?= $this->render('play/_actions', [ 'player' => $player ]) ?>
+<?= $this->render('play/events/_' . $event->getType(), [ 'event' => $event ]) ?>

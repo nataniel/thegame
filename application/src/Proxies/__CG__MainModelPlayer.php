@@ -462,12 +462,12 @@ class Player extends \Main\Model\Player implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function hasCurrentEvent()
+    public function hasUnresolvedEvent()
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'hasCurrentEvent', []);
 
-        return parent::hasCurrentEvent();
+        return parent::hasUnresolvedEvent();
     }
 
     /**

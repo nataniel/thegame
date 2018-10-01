@@ -7,6 +7,7 @@ use Main\Model\Game;
 class PlayController extends AbstractController
 {
     protected $requiredPrivileges = true;
+    protected $defaultLayout = 'layout/game';
 
     public function indexAction()
     {

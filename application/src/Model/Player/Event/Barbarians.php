@@ -11,11 +11,6 @@ use Main\Model\Game;
  */
 class Barbarians extends Event
 {
-    protected function doInitialize()
-    {
-        return $this;
-    }
-
     protected function doResolve($option)
     {
         switch ($option) {

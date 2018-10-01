@@ -2,39 +2,23 @@
 /** @var \Main\View\Base $this */
 /** @var \Main\Model\Player\Event\Raiders $event */
 $event = $this->event;
-if (empty($event)) {
-    return false;
-}
 ?>
 <div class="card">
+    <?= $this->image('//media.giphy.com/media/16ZmZSmOTSgrS/giphy.gif', $event->getName(), [ 'style' => 'width: 100%', 'class' => 'card-img-top' ])?>
     <div class="card-body alert-warning">
-        <div class="row">
-            <div class="col">
-                <h2 class="card-title"><?= $this->t($event->getName()) ?></h2>
-                <p class="lead"><?= $this->t($event->getDescription()) ?></p>
 
-                <?php if (!$event->isResolved()): ?>
-                    <hr />
-                    <h3 class="card-title">Wybierz jedną z opcji:</h3>
-                    <ul>
-                        <li>
-                            - Nie mamy wyjścia, musimy walczyć!
-                            <?= $this->linkTo('Walcz na śmierć i życie', '/play/resolve?option=1', [ 'class' => 'btn btn-danger btn-sm', ]) ?>
-                        </li>
-                    </ul>
+        <h2 class="card-title"><?= $this->t($event->getName()) ?></h2>
+        <p class="lead"><?= $this->t($event->getDescription()) ?></p>
 
-                <?php endif; ?>
+        <?php if (!$event->isResolved()): ?>
+            <h3 class="card-title">Wybierz jedną z opcji:</h3>
+            <ul>
+                <li>
+                    - Nie mamy wyjścia, musimy walczyć!
+                    <?= $this->linkTo('Walcz na śmierć i życie', '/play/resolve?option=1', [ 'class' => 'btn btn-danger btn-sm', ]) ?>
+                </li>
+            </ul>
+        <?php endif; ?>
 
-            </div>
-            <div class="col">
-                <?= $this->image('//media.giphy.com/media/16ZmZSmOTSgrS/giphy.gif', $event->getName(), [ 'style' => 'width: 100%' ])?>
-            </div>
-        </div>
     </div>
-
-    <?php if ($event->isResolved()): ?>
-        <div class="card-footer">
-            <?= $this->linkTo('Przejdź do fazy akcji', '/play/resolve', [ 'class' => 'btn btn-primary', ]) ?>
-        </div>
-    <?php endif; ?>
 </div>

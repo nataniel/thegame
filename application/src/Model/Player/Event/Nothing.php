@@ -8,11 +8,7 @@ use Main\Model\Player\Event;
  */
 class Nothing extends Event
 {
-    protected function doInitialize()
-    {
-        $this->setResolved();
-        return $this;
-    }
+    protected $status = self::RESOLVED;
 
     protected function doResolve($option)
     {

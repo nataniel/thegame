@@ -8,11 +8,6 @@ use Main\Model\Player\Event;
  */
 class GameOver extends Event
 {
-    protected function doInitialize()
-    {
-        return $this;
-    }
-
     /**
      * @param  int $option
      * @return $this

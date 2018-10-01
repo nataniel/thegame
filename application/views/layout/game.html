@@ -2,10 +2,10 @@
 <html lang="<?= $this->getLocale() ?>">
 <head>
     <?= $this->render('layout/_shared') ?>
-    <?= $this->stylesheets([ 'default', ]) ?>
+    <?= $this->stylesheets([ 'game', ]) ?>
 </head>
 
-<body class="layout-default" id="<?= $this->controllerID() ?>"
+<body class="layout-game" id="<?= $this->controllerID() ?>"
       itemscope itemtype="http://schema.org/WebPage">
 
 <?= $this->render('layout/_navbar') ?>
@@ -17,15 +17,7 @@
             <?= $this->getPartial('content') ?>
         </main>
         <aside class="col-lg-4 hidden-md-down" id="sidebar">
-
-            <div class="card bg-dark text-white">
-                <div class="card-body">
-                <h4 class="card-title">Czy wiesz, że?</h4>
-                <p class="card-text">W tym miejscu będą pojawiały się hinty albo cholera wie co, jeszcze nie wiem :)</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                </div>
-            </div>
-
+            <?= $this->render('play/_event') ?>
         </aside>
     </div>
 

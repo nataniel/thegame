@@ -9,12 +9,6 @@ use Main\Model\Player\Supply;
  */
 class Drought extends Event
 {
-    protected function doInitialize()
-    {
-        $this->applyResult([ Supply\Food::class => -1 ]);
-        return $this;
-    }
-
     protected function doResolve($option)
     {
         $this->applyResult([ Supply\Food::class => -1 ]);

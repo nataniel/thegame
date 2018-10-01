@@ -2,51 +2,41 @@
 /** @var \Main\View\Base $this */
 /** @var \Main\Model\Player\Event\Raiders $event */
 $event = $this->event;
-if (empty($event)) {
-    return false;
-}
 ?>
 <div class="card">
+    <?= $this->image('//66.media.tumblr.com/3ad6158c2bae0cf726539d6974ed6d5a/tumblr_o8s37xqzTF1tdy0nco1_500.gif', $event->getName(), [ 'style' => 'width: 100%', 'class' => 'card-img-top' ])?>
     <div class="card-body alert-warning">
-        <div class="row">
-            <div class="col">
-                <h2 class="card-title"><?= $this->t($event->getName()) ?></h2>
-                <p class="lead"><?= $this->t($event->getDescription()) ?></p>
 
-                <?php if (!$event->isResolved()): ?>
-                    <hr />
-                    <h3 class="card-title">Wybierz jedną z opcji:</h3>
-                    <ul>
-                        <li>
-                            - Do boju dzielni wojowie! Odeprzemy tę zarazę!
-                            <?= $this->linkTo('Walcz w obronie grodu', '/play/resolve?option=1', [ 'class' => 'btn btn-danger btn-sm', ]) ?>
-                        </li>
+        <h2 class="card-title"><?= $this->t($event->getName()) ?></h2>
+        <p class="lead"><?= $this->t($event->getDescription()) ?></p>
 
+        <?php if (!$event->isResolved()): ?>
+            <h3 class="card-title">Wybierz jedną z opcji:</h3>
+            <ul>
 
-                        <li>
-                            - Panowie, jakoś się dogadamy...
-                            <?= $this->linkTo('Zapłać okup', '/play/resolve?option=2', [ 'class' => 'btn btn-success btn-sm', ]) ?>
-                        </li>
-
-
-                        <li>
-                            - Kto żyw niech uchodzi do boru, przeczekamy tam aż sobie pójdą!
-                            <?= $this->linkTo('Wycofaj ludzi do lasu', '/play/resolve?option=3', [ 'class' => 'btn btn-warning btn-sm', ]) ?>
-                        </li>
-                    </ul>
-
+                <?php if ($event->isResolutionOptionAvailable(1)): ?>
+                <li>
+                    <?= $this->linkTo('Walcz w obronie grodu', '/play/resolve?option=1', [ 'class' => 'btn btn-danger btn-sm mb-1' ]) ?>
+                    - Do boju dzielni wojowie! Odeprzemy tę zarazę!
+                </li>
                 <?php endif; ?>
 
-            </div>
-            <div class="col">
-                <?= $this->image('//66.media.tumblr.com/3ad6158c2bae0cf726539d6974ed6d5a/tumblr_o8s37xqzTF1tdy0nco1_500.gif', $event->getName(), [ 'style' => 'width: 100%' ])?>
-            </div>
-        </div>
-    </div>
+                <?php if ($event->isResolutionOptionAvailable(2)): ?>
+                <li>
+                    <?= $this->linkTo('Zapłać okup', '/play/resolve?option=2', [ 'class' => 'btn btn-success btn-sm mb-1' ]) ?>
+                    - Panowie, jakoś się dogadamy...
+                </li>
+                <?php endif; ?>
 
-    <?php if ($event->isResolved()): ?>
-        <div class="card-footer">
-            <?= $this->linkTo('Przejdź do fazy akcji', '/play/resolve', [ 'class' => 'btn btn-primary', ]) ?>
-        </div>
-    <?php endif; ?>
+                <?php if ($event->isResolutionOptionAvailable(3)): ?>
+                <li>
+                    <?= $this->linkTo('Wycofaj ludzi do lasu', '/play/resolve?option=3', [ 'class' => 'btn btn-warning btn-sm mb-1' ]) ?>
+                    - Kto żyw niech uchodzi do boru, przeczekamy tam aż sobie pójdą!
+                </li>
+                <?php endif; ?>
+
+            </ul>
+        <?php endif; ?>
+
+    </div>
 </div>

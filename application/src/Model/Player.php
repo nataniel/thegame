@@ -476,7 +476,6 @@ class Player extends Entity
     {
         $event = Player\Event::generateRandomEvent();
         $this->_addTo('events', $event);
-        $event->init();
         return $this;
     }
 
@@ -567,9 +566,15 @@ class Player extends Entity
     /**
      * @return bool
      */
-    public function hasCurrentEvent()
+    public function hasUnresolvedEvent()
     {
-        return !empty($this->getCurrentEvent());
+        foreach ($this->events as $event) {
+            if (!$event->isResolved()) {
+                return true;
+            }
+        }
+
+        return null;
     }
 
     /**

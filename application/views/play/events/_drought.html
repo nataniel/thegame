@@ -2,24 +2,18 @@
 /** @var \Main\View\Base $this */
 /** @var \Main\Model\Player\Event\Drought $event */
 $event = $this->event;
-if (empty($event)) {
-    return false;
-}
+$supply = $event->getPlayer()->getSupplyByType(\Main\Model\Player\Supply\Food::class);
 ?>
 <div class="card">
+    <?= $this->image('//i.huffpost.com/gen/1998776/images/o-DROUGHT-facebook.jpg', $event->getName(), [ 'style' => 'width: 100%', 'class' => 'card-img-top' ])?>
     <div class="card-body alert-warning">
-        <div class="row">
-            <div class="col">
-                <h2 class="card-title"><?= $this->t($event->getName()) ?></h2>
-                <p class="lead"><?= $this->t($event->getDescription()) ?></p>
 
-            </div>
-            <div class="col">
-                <?= $this->image('//i.huffpost.com/gen/1998776/images/o-DROUGHT-facebook.jpg', $event->getName(), [ 'style' => 'width: 100%' ])?>
-            </div>
-        </div>
-    </div>
-    <div class="card-footer">
-        <?= $this->linkTo('Przejdź do fazy akcji', '/play/resolve', [ 'class' => 'btn btn-primary', ]) ?>
+        <h2 class="card-title"><?= $this->t($event->getName()) ?></h2>
+        <p class="lead"><?= $this->t($event->getDescription()) ?></p>
+
+        <?php if (!$event->isResolved()): ?>
+            <?= $this->linkTo('Strata -1' . $this->image('images/resources/' . $supply->getType() . '.png', $this->t($supply)), '/play/resolve', [ 'class' => 'btn btn-primary', ]) ?>
+        <?php endif; ?>
+
     </div>
 </div>

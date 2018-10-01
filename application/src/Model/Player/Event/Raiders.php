@@ -4,6 +4,7 @@ namespace Main\Model\Player\Event;
 use Main\Model\Army;
 use Main\Model\Player\Event;
 use Main\Model\Player\Unit;
+use Main\Model\Player\Supply;
 use Main\Model\Game;
 
 /**
@@ -11,23 +12,22 @@ use Main\Model\Game;
  */
 class Raiders extends Event
 {
-    protected function doInitialize()
-    {
-        return $this;
-    }
+    const FIGHT = 1,
+        PAY = 2,
+        FLEE = 3;
 
     protected function doResolve($option)
     {
         switch ($option) {
-            case 1:
+            case self::FIGHT:
                 $this->fight();
                 break;
 
-            case 2:
+            case self::PAY:
                 $this->pay();
                 break;
 
-            case 3:
+            case self::FLEE:
                 $this->flee();
                 break;
 
@@ -41,6 +41,27 @@ class Raiders extends Event
         return $this;
     }
 
+    /**
+     * @param  int $option
+     * @return bool
+     */
+    public function isResolutionOptionAvailable($option)
+    {
+        switch ($option) {
+            case self::FIGHT:
+                return $this->player->getTotalStrength() > 0;
+
+            case self::PAY:
+                return $this->player->getSupplyByType(Supply\Gold::class)->getAmount() > 0;
+
+            case self::FLEE:
+                return true;
+
+            default:
+                return false;
+        }
+    }
+
     protected function fight()
     {
         // - Do boju dzielni wojowie! Odeprzemy tę zarazę!
@@ -51,7 +72,7 @@ class Raiders extends Event
     protected function pay()
     {
         // - Panowie, jakoś się dogadamy...
-        $this->applyResult([ Unit\Warrior::class => rand(-2, 0) ]);
+        $this->applyResult([ Supply\Gold::class => -1 ]);
         return $this;
     }
 

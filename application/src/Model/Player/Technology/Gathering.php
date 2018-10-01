@@ -15,7 +15,7 @@ class Gathering extends Technology
 {
     const PRICE_SCIENCE = 0;
 
-    const PRODUCTION_FOOD = 2;
+    const PRODUCTION_FOOD = 1;
     const PRODUCTION_WOOD = 1;
     const PRODUCTION_SCIENCE = 1;
     const CAPACITY_WARRIORS = 2;

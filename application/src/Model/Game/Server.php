@@ -77,8 +77,8 @@ class Server
 
     private function checkForUnresolvedEvents()
     {
-        if ($this->getPlayer()->hasCurrentEvent()) {
-            throw new Game\Exception('Istnieją nie rozwiązane wydarzenia.', Game\Exception::UNRESOLVED_EVENT_EXISTS);
+        if ($this->getPlayer()->hasUnresolvedEvent()) {
+            throw new Game\Exception('Najpierw musisz rozpatrzyć aktualne wydarzenie.', Game\Exception::UNRESOLVED_EVENT_EXISTS);
         }
     }
 
