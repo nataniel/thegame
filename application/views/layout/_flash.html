@@ -7,25 +7,25 @@ if (empty($flash)) {
 ?>
 <div id="flash">
 
-    <? if (!empty($flash['success'])): ?>
+    <?php if (!empty($flash['success'])): ?>
         <div class="alert alert-success alert-dismissible flaticon-success" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Zamknij powiadomienie"><span aria-hidden="true">&times;</span></button>
             <?= join('<br />', $flash['success']) ?>
         </div>
-    <? endif; ?>
+    <?php endif; ?>
 
-    <? if (!empty($flash['error'])): ?>
+    <?php if (!empty($flash['error'])): ?>
         <div class="alert alert-danger alert-dismissible flaticon-warning" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Zamknij powiadomienie"><span aria-hidden="true">&times;</span></button>
             <?= join('<br />', $flash['error']) ?>
         </div>
-    <? endif; ?>
+    <?php endif; ?>
 
-    <? if (!empty($flash['message'])): ?>
+    <?php if (!empty($flash['message'])): ?>
         <div class="alert alert-info alert-dismissible flaticon-info" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Zamknij powiadomienie"><span aria-hidden="true">&times;</span></button>
             <?= join('<br />', $flash['message']) ?>
         </div>
-    <? endif; ?>
+    <?php endif; ?>
 
 </div>

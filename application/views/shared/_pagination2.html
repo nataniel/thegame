@@ -1,11 +1,11 @@
-<? if ($this->paginator->pageCount() > 0): ?>
+<?php if ($this->paginator->pageCount() > 0): ?>
     <nav class="pagination-bottom row">
 
-        <? if ($this->paginator->pageCount() > 1): ?>
+        <?php if ($this->paginator->pageCount() > 1): ?>
             <?= $this->_('pagination', $this->paginator, [ 'class' => 'pagination pagination-sm col-md-6' ]) ?>
-        <? endif; ?>
+        <?php endif; ?>
 
         <div class="pagination-count col-md-6">pokazuje: <?= sprintf('%d - %d z %d', $this->paginator->start(), $this->paginator->end(), $this->paginator->total()) ?></div>
 
     </nav>
-<? endif; ?>
+<?php endif; ?>

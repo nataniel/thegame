@@ -34,13 +34,13 @@ $user = $this->getCurrentUser();
                     <?= $this->linkTo($this->t('Wyloguj się'), '/security/logout', [ 'class' => 'flaticon-shutdown nav-link' ]) ?>
                 </li>
 
-            <? else: ?>
+            <?php else: ?>
 
                 <li class="nav-item">
                     <?= $this->linkTo($this->t('Zaloguj się'), '/security/login', [ 'class' => 'flaticon-user nav-link' ]) ?>
                 </li>
 
-            <? endif; ?>
+            <?php endif; ?>
 
             <li class="nav-item">
                 <?= $this->linkTo('PL', 'locale/pl', [ 'class' => 'nav-link' . ($this->getLocale() == 'pl' ? ' active' : ''), 'back' => true ]) ?>

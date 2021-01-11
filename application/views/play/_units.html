@@ -8,7 +8,7 @@ $player = $this->player;
     <tr><th colspan="3"><?= $this->t('Jednostki wojskowe <small>/ max</small>') ?></th></tr>
     </thead>
     <tbody>
-    <? foreach ($player->getAvailableUnits() as $unit): ?>
+    <?php foreach ($player->getAvailableUnits() as $unit): ?>
         <tr>
 
             <td style="text-align: center; width: 32px;" class="text-muted">
@@ -25,14 +25,14 @@ $player = $this->player;
                 <?= $unit->getAmount() ?>
                 <small data-toggle="tooltip-next" data-placement="left"><?= sprintf('/ %d', $unit->maxAmount()) ?></small>
                 <div class="tooltip-html">
-                    <? foreach ($unit->capacityMap() as $class => $amount): ?>
-                        <? $asset = $player->getAssetByClass($class); ?>
+                    <?php foreach ($unit->capacityMap() as $class => $amount): ?>
+                        <?php $asset = $player->getAssetByClass($class); ?>
                         <?= sprintf('%s: %+d', $this->t($asset), $amount) ?><br />
-                    <? endforeach; ?>
+                    <?php endforeach; ?>
                 </div>
             </td>
 
         </tr>
-    <? endforeach; ?>
+    <?php endforeach; ?>
     </tbody>
 </table>

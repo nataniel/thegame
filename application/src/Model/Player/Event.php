@@ -61,7 +61,6 @@ abstract class Event extends Entity
             return $this;
         }
 
-        srand($this->random_seed);
         $this->doResolve($option);
         return $this;
     }

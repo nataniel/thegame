@@ -6,8 +6,8 @@ $game = $this->game;
 
 <h3><?= $this->t('Lista graczy (%d / %d)', count($game->getPlayers()), $game->getMaxPlayers()) ?></h3>
 <table class="table">
-    <? foreach ($game->getPlayers() as $i => $player): ?>
-    <? $user = $player->getUser(); ?>
+    <?php foreach ($game->getPlayers() as $i => $player): ?>
+    <?php $user = $player->getUser(); ?>
         <tr>
             <th style="width: 30px; vertical-align: middle" scope="row"><?= $i+1 ?>.</th>
             <td style="width: 42px"><?= $this->_('avatar', $user, 32) ?></td>
@@ -15,9 +15,9 @@ $game = $this->game;
             <td style="width: 20%; vertical-align: middle" class="small">
                 <?php if ($game->getCurrentStatus() == \Main\Model\Game::STATUS_WAITING): ?>
 
-                    <? if ($user === $this->getCurrentUser()): ?>
+                    <?php if ($user === $this->getCurrentUser()): ?>
                     <?= $this->linkTo($this->t('Opuść rozgrywkę'), 'games/quit/' . $game->id(), [ 'class' => 'flaticon-delete text-danger' ]) ?>
-                    <? endif; ?>
+                    <?php endif; ?>
 
                 <?php else: ?>
 
@@ -29,5 +29,5 @@ $game = $this->game;
 
             </td>
         </tr>
-    <? endforeach; ?>
+    <?php endforeach; ?>
 </table>

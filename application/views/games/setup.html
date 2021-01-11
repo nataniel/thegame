@@ -12,8 +12,8 @@ $game = $this->game;
 
 <?php if (!$game->isPlayer($this->getCurrentUser())): ?>
     <?= $this->linkTo($this->t('Dołącz do rozgrywki'), 'games/join/' . $game->id(), [ 'class' => 'btn btn-primary flaticon-add' ]) ?>
-<? endif; ?>
+<?php endif; ?>
 
 <?php if ($game->isPlayer($this->getCurrentUser())): ?>
     <?= $this->linkTo($this->t('Rozpocznij rozgrywkę'), 'games/start/' . $game->id(), [ 'class' => 'btn btn-success flaticon-play float-xs-right' ]) ?>
-<? endif; ?>
+<?php endif; ?>

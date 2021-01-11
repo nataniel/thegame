@@ -2,7 +2,7 @@
 namespace Main;
 
 use E4u\Configuration as E4uConfiguration;
-use Zend\Config\Config;
+use Laminas\Config\Config;
 
 abstract class Configuration extends E4uConfiguration
 {
@@ -12,7 +12,7 @@ abstract class Configuration extends E4uConfiguration
     /**
      * @return Config
      */
-    public static function facebookConfig()
+    public static function facebookConfig(): Config
     {
         return self::getConfigValue('facebook');
     }
@@ -20,7 +20,7 @@ abstract class Configuration extends E4uConfiguration
     /**
      * @return Config
      */
-    public static function googleConfig()
+    public static function googleConfig(): Config
     {
         return self::getConfigValue('google');
     }
@@ -28,7 +28,7 @@ abstract class Configuration extends E4uConfiguration
     /**
      * @return Config
      */
-    public static function twitterConfig()
+    public static function twitterConfig(): Config
     {
         return self::getConfigValue('twitter');
     }
@@ -36,7 +36,7 @@ abstract class Configuration extends E4uConfiguration
     /**
      * @return Config
      */
-    public static function steamConfig()
+    public static function steamConfig(): Config
     {
         return self::getConfigValue('steam');
     }

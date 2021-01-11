@@ -13,7 +13,7 @@ $technologies = $player->getDevelopedTechnologies();
     <?= $this->t('Wynalezione technologie') ?>
 </h1>
 <ul>
-<? foreach ($technologies as $technology): ?>
+<?php foreach ($technologies as $technology): ?>
     <li>
         <p>
             <strong><?= $this->t($technology) ?></strong>
@@ -21,14 +21,14 @@ $technologies = $player->getDevelopedTechnologies();
         </p>
 
         <ul class="mb-1">
-        <? foreach ($technology->availableTechnologies() as $available): ?>
-            <? $asset = $player->getAssetByClass($available); ?>
+        <?php foreach ($technology->availableTechnologies() as $available): ?>
+            <?php $asset = $player->getAssetByClass($available); ?>
             <li>
                 <?= $this->t($asset) ?>
                 <small class="text-muted"><?= $this->t($asset->getDescription()) ?></small><br />
             </li>
-        <? endforeach; ?>
+        <?php endforeach; ?>
         </ul>
     </li>
-<? endforeach; ?>
+<?php endforeach; ?>
 </ul>

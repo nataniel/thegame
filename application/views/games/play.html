@@ -16,12 +16,12 @@ $player = $this->player;
         <small class="text-muted"><?= $this->t('game.status.' . $game->getCurrentStatus(), $game->getCurrentTurn()) ?></small>
     </h1>
 
-<? if ($player->getCurrentPhase() == \Main\Model\Player::PHASE_EVENTRESOLUTION): ?>
+<?php if ($player->getCurrentPhase() == \Main\Model\Player::PHASE_EVENTRESOLUTION): ?>
     <?= $this->render('games/play/_event') ?>
-<? endif; ?>
+<?php endif; ?>
 
-<? if ($player->getCurrentPhase() == \Main\Model\Player::PHASE_ACTION): ?>
+<?php if ($player->getCurrentPhase() == \Main\Model\Player::PHASE_ACTION): ?>
     <?= $this->render('games/play/_assets') ?>
     <?= $this->render('games/play/_actions') ?>
     <?= $this->render('games/_players') ?>
-<? endif; ?>
+<?php endif; ?>

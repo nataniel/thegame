@@ -30,13 +30,13 @@ $form = $this->createBootstrapForm($this->editForm);
     </div>
     <table class="table social">
         <tbody>
-        <? foreach ($profiles as $i => $profile): ?>
+        <?php foreach ($profiles as $i => $profile): ?>
             <tr>
                 <th scope="row" class="<?= $profile->getType() ?>"><?= $this->icon($profile->getType()) ?> <?= $profile->getTypeName() ?></th>
                 <td><?= $profile->getProfileId() ?></td>
                 <td style="text-align: right"><?= $this->linkTo('usuń', 'account/profile/' . $profile->id(), [ 'class' => 'flaticon-delete btn btn-sm text-danger' ]) ?></td>
             </tr>
-        <? endforeach; ?>
+        <?php endforeach; ?>
         </tbody>
     </table>
     <div class="card-footer text-right small">

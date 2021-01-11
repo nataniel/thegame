@@ -7,11 +7,11 @@ $game = $this->game;
 $player = $this->player;
 ?>
 
-<? if ($player->getTotalStrength() == 0): ?>
+<?php if ($player->getTotalStrength() == 0): ?>
     <p class="text-danger bg-faded" style="padding: 10px; border: 1px solid #c00">
         <?= $this->t('<strong>Twoje królestwo nie jest bronione!</strong> W przypadku ataku nastąpi koniec gry.') ?>
     </p>
-<? endif; ?>
+<?php endif; ?>
 
 <?php if ($player->getCurrentPhase() == \Main\Model\Player::PHASE_ACTION): ?>
 
@@ -24,4 +24,4 @@ $player = $this->player;
             ]) ?>
     </p>
 
-<? endif; ?>
+<?php endif; ?>

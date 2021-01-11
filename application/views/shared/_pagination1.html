@@ -1,5 +1,5 @@
 <nav class="pagination-top float-right">
-    <? if ($this->paginator->pageCount() > 1): ?>
+    <?php if ($this->paginator->pageCount() > 1): ?>
         <?= $this->_('pagination', $this->paginator, [ 'class' => 'pagination pagination-sm' ]) ?>
-    <? endif; ?>
+    <?php endif; ?>
 </nav>

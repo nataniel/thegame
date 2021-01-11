@@ -1,6 +1,8 @@
 <?php
+use Main\Model\Player\Event;
+
 /** @var \Main\View\Base $this */
-/** @var \Main\Model\Player\Event\Raiders $event */
+/** @var Event\Raiders $event */
 $event = $this->event;
 ?>
 <div class="card">
@@ -14,21 +16,21 @@ $event = $this->event;
             <h3 class="card-title">Wybierz jedną z opcji:</h3>
             <ul>
 
-                <?php if ($event->isResolutionOptionAvailable(1)): ?>
+                <?php if ($event->isResolutionOptionAvailable(Event\Raiders::FIGHT)): ?>
                 <li>
                     <?= $this->linkTo('Walcz w obronie grodu', '/play/resolve?option=1', [ 'class' => 'btn btn-danger btn-sm mb-1' ]) ?>
                     - Do boju dzielni wojowie! Odeprzemy tę zarazę!
                 </li>
                 <?php endif; ?>
 
-                <?php if ($event->isResolutionOptionAvailable(2)): ?>
+                <?php if ($event->isResolutionOptionAvailable(Event\Raiders::PAY)): ?>
                 <li>
                     <?= $this->linkTo('Zapłać okup', '/play/resolve?option=2', [ 'class' => 'btn btn-success btn-sm mb-1' ]) ?>
                     - Panowie, jakoś się dogadamy...
                 </li>
                 <?php endif; ?>
 
-                <?php if ($event->isResolutionOptionAvailable(3)): ?>
+                <?php if ($event->isResolutionOptionAvailable(Event\Raiders::FLEE)): ?>
                 <li>
                     <?= $this->linkTo('Wycofaj ludzi do lasu', '/play/resolve?option=3', [ 'class' => 'btn btn-warning btn-sm mb-1' ]) ?>
                     - Kto żyw niech uchodzi do boru, przeczekamy tam aż sobie pójdą!

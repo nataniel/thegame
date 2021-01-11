@@ -8,15 +8,15 @@ $player = $this->player;
     <tr><th colspan="2"><?= $this->t('Dostępne technologie') ?></th></tr>
     </thead>
     <tbody>
-    <? foreach ($player->getAvailableTechnologies() as $technology): ?>
-        <? if ($technology->canBeDeveloped()): ?>
+    <?php foreach ($player->getAvailableTechnologies() as $technology): ?>
+        <?php if ($technology->canBeDeveloped()): ?>
         <tr>
 
             <td>
                 <?= $this->linkTo($this->t($technology), '/play/develop?type=' . $technology->getType(), [ 'title' => $this->t($technology->getDescription()) ]) ?><br />
-                <? if ($player->getActiveTechnology() === $technology): ?>
+                <?php if ($player->getActiveTechnology() === $technology): ?>
                     <div style="position: relative; margin-top: .3rem">
-                        <? $progress = $player->getSupplyByType('science')->productionAmount() / $technology->getPriceScience() * \Main\Model\Player\Technology::PROGRESS_FULL ?>
+                        <?php $progress = $player->getSupplyByType('science')->productionAmount() / $technology->getPriceScience() * \Main\Model\Player\Technology::PROGRESS_FULL ?>
 
                         <div class="progress">
 
@@ -40,12 +40,12 @@ $player = $this->player;
                         </div>
 
                     </div>
-                <? endif; ?>
+                <?php endif; ?>
             </td>
 
         </tr>
-        <? endif; ?>
-    <? endforeach; ?>
+        <?php endif; ?>
+    <?php endforeach; ?>
     </tbody>
     <tfoot>
     <tr>

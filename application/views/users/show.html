@@ -13,12 +13,12 @@ $finishedGames = $this->finishedGames;
 <h1><?= $this->getTitle() ?></h1>
 <p class="text-muted"><?= $user->showEntity() ?></p>
 
-<? if (count($activeGames) > 0): ?>
+<?php if (count($activeGames) > 0): ?>
     <h2><?= $this->t('Aktywne rozgrywki') ?></h2>
     <?= $this->render('index/_games', [ 'games' => $activeGames, ])?>
-<? endif; ?>
+<?php endif; ?>
 
-<? if (count($finishedGames) > 0): ?>
+<?php if (count($finishedGames) > 0): ?>
     <h2><?= $this->t('Zakończone rozgrywki') ?></h2>
     <?= $this->render('index/_games', [ 'games' => $finishedGames, ])?>
-<? endif; ?>
+<?php endif; ?>

@@ -5,7 +5,7 @@ use Doctrine\ORM\EntityRepository;
 use E4u\Common\File\Image;
 use E4u\Authentication\Identity\User as E4uUser;
 use Main\Model\User\Privilege;
-use Zend\Mail\Address\AddressInterface;
+use Laminas\Mail\Address\AddressInterface;
 
 /**
  * @Entity(repositoryClass="Main\Model\User\Repository")

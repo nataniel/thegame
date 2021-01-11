@@ -42,6 +42,23 @@ class Raiders extends Event
     }
 
     /**
+     * @return Army
+     */
+    public function getEnemyArmy()
+    {
+        srand($this->random_seed);
+        return Army::randomArmy($this->player->getCurrentTurn());
+    }
+
+    /**
+     * @return Army
+     */
+    public function getPlayerArmy()
+    {
+        return Army::createForPlayer($this->player);
+    }
+
+    /**
      * @param  int $option
      * @return bool
      */

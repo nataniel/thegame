@@ -17,17 +17,17 @@ $result = $event->getResult();
     <p class="lead"><?= $this->t($event->getDescription()) ?></p>
     <hr class="m-y-2">
 
-    <? if (count($result) > 0): ?>
+    <?php if (count($result) > 0): ?>
 
         <h4>Wynik wydarzenia:</h4>
         <ul>
-        <? foreach ($result as $class => $amount): ?>
-        <? $asset = $player->getAssetByClass($class); ?>
+        <?php foreach ($result as $class => $amount): ?>
+        <?php $asset = $player->getAssetByClass($class); ?>
         <li><?= sprintf('%s: %+d', $this->t($asset->getName()), $amount) ?></li>
-        <? endforeach; ?>
+        <?php endforeach; ?>
         </ul>
 
-    <? endif; ?>
+    <?php endif; ?>
 
     <p><?= $this->image($event->getImage(), $event->getName(), [ 'style' => 'width: 100%' ])?></p>
     <?= $this->linkTo('Przejdź do fazy akcji', 'game/' . $game->id() . '?continue=true', [ 'class' => 'btn btn-primary btn-lg', ]) ?>

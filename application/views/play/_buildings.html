@@ -8,7 +8,7 @@ $player = $this->player;
     <tr><th colspan="3"><?= $this->t('Budynki <small>(max. %d każdego rodzaju)</small>', $player->getBuildingLimit()) ?></th></tr>
     </thead>
     <tbody>
-    <? foreach ($player->getAvailableBuildings() as $building): ?>
+    <?php foreach ($player->getAvailableBuildings() as $building): ?>
         <tr>
 
             <td style="text-align: center; width: 32px;" class="text-muted">
@@ -24,6 +24,6 @@ $player = $this->player;
             <td style="text-align: right; white-space: nowrap"><?= $building->getAmount() ?></td>
 
         </tr>
-    <? endforeach; ?>
+    <?php endforeach; ?>
     </tbody>
 </table>
