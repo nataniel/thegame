@@ -1,10 +1,11 @@
 <?php
 namespace Main\Model\User\Profile;
 
+use Doctrine\ORM\Mapping as ORM;
 use Main\Model\User\Profile;
 
 /**
- * @Entity
+ * @ORM\Entity
  */
 class Facebook extends Profile
 {

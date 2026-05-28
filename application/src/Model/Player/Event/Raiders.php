@@ -1,6 +1,7 @@
 <?php
 namespace Main\Model\Player\Event;
 
+use Doctrine\ORM\Mapping as ORM;
 use Main\Model\Army;
 use Main\Model\Player\Event;
 use Main\Model\Player\Unit;
@@ -8,7 +9,7 @@ use Main\Model\Player\Supply;
 use Main\Model\Game;
 
 /**
- * @Entity
+ * @ORM\Entity
  */
 class Raiders extends Event
 {

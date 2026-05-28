@@ -1,13 +1,14 @@
 <?php
 namespace Main\Model\Player\Supply;
 
+use Doctrine\ORM\Mapping as ORM;
 use Main\Model\Player\Supply,
     Main\Model\Player\Unit,
     Main\Model\Player\Building,
     Main\Model\Player\Technology;
 
 /**
- * @Entity
+ * @ORM\Entity
  */
 class Wood extends Supply
 {

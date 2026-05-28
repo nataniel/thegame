@@ -1,6 +1,7 @@
 <?php
 namespace Main\Model\Player\Technology;
 
+use Doctrine\ORM\Mapping as ORM;
 use Main\Model\Player\Technology,
     Main\Model\Player\Unit,
     Main\Model\Player\Building,
@@ -9,7 +10,7 @@ use Main\Model\Player\Technology,
 /**
  * Każda kopalnia wydobywa dodatkowo 1 złota.
  *
- * @Entity
+ * @ORM\Entity
  */
 class GoldMining extends Technology
 {

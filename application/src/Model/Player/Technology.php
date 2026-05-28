@@ -1,18 +1,19 @@
 <?php
 namespace Main\Model\Player;
 
+use Doctrine\ORM\Mapping as ORM;
 use E4u\Exception\LogicException;
 use E4u\Model\Entity;
 use Main\Model\Player;
 use Main\Model\Game;
 
 /**
- * @Entity
- * @Table(name="players_technologies", uniqueConstraints={
- *      @UniqueConstraint(name="player_type", columns={"player_id", "type"})
+ * @ORM\Entity
+ * @ORM\Table(name="players_technologies", uniqueConstraints={
+ *      @ORM\UniqueConstraint(name="player_type", columns={"player_id", "type"})
  * })
- * @InheritanceType("SINGLE_TABLE")
- * @DiscriminatorColumn(name="type", type="string")
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="type", type="string")
  */
 abstract class Technology extends Entity
 {
@@ -21,14 +22,14 @@ abstract class Technology extends Entity
 
     /**
      * @var Player
-     * @ManyToOne(targetEntity="Main\Model\Player", inversedBy="technologies")
+     * @ORM\ManyToOne(targetEntity="Main\Model\Player", inversedBy="technologies")
      */
     protected $player;
 
-    /** @Column(type="integer", nullable=true) */
+    /** @ORM\Column(type="integer", nullable=true) */
     protected $progress;
 
-    /** @Column(type="boolean", nullable=true) */
+    /** @ORM\Column(type="boolean", nullable=true) */
     protected $active;
 
     /**

@@ -1,17 +1,18 @@
 <?php
 namespace Main\Model\Player;
 
+use Doctrine\ORM\Mapping as ORM;
 use E4u\Exception\LogicException;
 use Main\Model\Player;
 use Main\Model\Game;
 
 /**
- * @Entity
- * @Table(name="players_buildings", uniqueConstraints={
- *      @UniqueConstraint(name="player_type", columns={"player_id", "type"})})
- * @InheritanceType("SINGLE_TABLE")
- * @DiscriminatorColumn(name="type", type="string")
- * @DiscriminatorMap({
+ * @ORM\Entity
+ * @ORM\Table(name="players_buildings", uniqueConstraints={
+ *      @ORM\UniqueConstraint(name="player_type", columns={"player_id", "type"})})
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="type", type="string")
+ * @ORM\DiscriminatorMap({
  *      "barracks"  = "\Main\Model\Player\Building\Barracks",
  *      "farm"      = "\Main\Model\Player\Building\Farm",
  *      "forester"  = "\Main\Model\Player\Building\Forester",
@@ -24,7 +25,7 @@ abstract class Building extends Asset
 {
     /**
      * @var Player
-     * @ManyToOne(targetEntity="Main\Model\Player", inversedBy="buildings")
+     * @ORM\ManyToOne(targetEntity="Main\Model\Player", inversedBy="buildings")
      */
     protected $player;
 

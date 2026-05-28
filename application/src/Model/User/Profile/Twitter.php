@@ -1,8 +1,10 @@
 <?php
 namespace Main\Model\User\Profile;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
- * @Entity
+ * @ORM\Entity
  */
 class Twitter extends \Main\Model\User\Profile
 {

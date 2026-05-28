@@ -1,11 +1,12 @@
 <?php
 namespace Main\Model\Player\Building;
 
+use Doctrine\ORM\Mapping as ORM;
 use Main\Model\Player\Building,
     Main\Model\Player\Supply;
 
 /**
- * @Entity
+ * @ORM\Entity
  */
 class Farm extends Building
 {

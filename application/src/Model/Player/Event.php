@@ -1,15 +1,16 @@
 <?php
 namespace Main\Model\Player;
 
+use Doctrine\ORM\Mapping as ORM;
 use E4u\Model\Entity;
 use Main\Model\Game;
 use Main\Model\Player;
 
 /**
- * @Entity
- * @Table(name="players_events")
- * @InheritanceType("SINGLE_TABLE")
- * @DiscriminatorColumn(name="type", type="string")
+ * @ORM\Entity
+ * @ORM\Table(name="players_events")
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="type", type="string")
  */
 abstract class Event extends Entity
 {
@@ -20,17 +21,17 @@ abstract class Event extends Entity
 
     /**
      * @var Player
-     * @ManyToOne(targetEntity="Main\Model\Player", inversedBy="events")
+     * @ORM\ManyToOne(targetEntity="Main\Model\Player", inversedBy="events")
      */
     protected $player;
 
-    /** @Column(type="integer", nullable=true) */
+    /** @ORM\Column(type="integer", nullable=true) */
     protected $random_seed;
 
-    /** @Column(type="integer") */
+    /** @ORM\Column(type="integer") */
     protected $status = self::CREATED;
 
-    /** @Column(type="datetime") */
+    /** @ORM\Column(type="datetime") */
     protected $created_at;
 
     public function __construct($attributes = [])

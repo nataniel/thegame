@@ -6,3 +6,4 @@ vendor
 .environment
 .idea
 public/sitemap.xml
+composer.lock

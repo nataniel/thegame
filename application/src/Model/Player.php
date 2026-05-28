@@ -1,6 +1,7 @@
 <?php
 namespace Main\Model;
 
+use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use E4u\Model\Entity;
 use Main\Model\Game;
@@ -14,62 +15,62 @@ use Main\Model\Player\Asset,
 use Main\Model\Player\Event;
 
 /**
- * @Entity
- * @Table(name="players")
+ * @ORM\Entity
+ * @ORM\Table(name="players")
  */
 class Player extends Entity
 {
     /**
      * @var User
-     * @OneToOne(targetEntity="Main\Model\User", inversedBy="player")
+     * @ORM\OneToOne(targetEntity="Main\Model\User", inversedBy="player")
      */
     protected $user;
 
-    /** @Column(type="integer") */
+    /** @ORM\Column(type="integer") */
     protected $current_turn = 1;
 
-    /** @Column(type="datetime") */
+    /** @ORM\Column(type="datetime") */
     protected $created_at;
 
     /**
      * @var Unit[]
-     * @OneToMany(targetEntity="Main\Model\Player\Unit", mappedBy="player", cascade={"all"})
-     * @OrderBy({"id" = "ASC"})
+     * @ORM\OneToMany(targetEntity="Main\Model\Player\Unit", mappedBy="player", cascade={"all"})
+     * @ORM\OrderBy({"id" = "ASC"})
      **/
     protected $units;
 
     /**
      * @var Building[]
-     * @OneToMany(targetEntity="Main\Model\Player\Building", mappedBy="player", cascade={"all"})
-     * @OrderBy({"id" = "ASC"})
+     * @ORM\OneToMany(targetEntity="Main\Model\Player\Building", mappedBy="player", cascade={"all"})
+     * @ORM\OrderBy({"id" = "ASC"})
      **/
     protected $buildings;
 
     /**
      * @var Supply[]
-     * @OneToMany(targetEntity="Main\Model\Player\Supply", mappedBy="player", cascade={"all"})
-     * @OrderBy({"id" = "ASC"})
+     * @ORM\OneToMany(targetEntity="Main\Model\Player\Supply", mappedBy="player", cascade={"all"})
+     * @ORM\OrderBy({"id" = "ASC"})
      **/
     protected $supplies;
 
     /**
      * @var Technology[]
-     * @OneToMany(targetEntity="Main\Model\Player\Technology", mappedBy="player", cascade={"all"})
-     * @OrderBy({"id" = "ASC"})
+     * @ORM\OneToMany(targetEntity="Main\Model\Player\Technology", mappedBy="player", cascade={"all"})
+     * @ORM\OrderBy({"id" = "ASC"})
      **/
     protected $technologies;
 
     /**
      * @var Notification[]
-     * @OneToMany(targetEntity="Main\Model\Player\Notification", mappedBy="player", cascade={"all"})
-     * @OrderBy({"created_at" = "ASC"})
+     * @ORM\OneToMany(targetEntity="Main\Model\Player\Notification", mappedBy="player", cascade={"all"})
+     * @ORM\OrderBy({"created_at" = "ASC"})
      **/
     protected $notifications;
 
     /**
      * @var Event[]
-     * @OneToMany(targetEntity="Main\Model\Player\Event", mappedBy="player", cascade={"all"})
-     * @OrderBy({"created_at" = "DESC"})
+     * @ORM\OneToMany(targetEntity="Main\Model\Player\Event", mappedBy="player", cascade={"all"})
+     * @ORM\OrderBy({"created_at" = "DESC"})
      **/
     protected $events;
 

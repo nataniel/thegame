@@ -1,11 +1,12 @@
 <?php
 namespace Main\Model\Player\Event;
 
+use Doctrine\ORM\Mapping as ORM;
 use Main\Model\Player\Event;
 use Main\Model\Player\Supply;
 
 /**
- * @Entity
+ * @ORM\Entity
  */
 class Drought extends Event
 {

@@ -1,16 +1,17 @@
 <?php
 namespace Main\Model\Player;
 
+use Doctrine\ORM\Mapping as ORM;
 use E4u\Exception\LogicException;
 use Main\Model\Player;
 
 /**
- * @Entity
- * @Table(name="players_supplies", uniqueConstraints={
- *      @UniqueConstraint(name="player_type", columns={"player_id", "type"})})
- * @InheritanceType("SINGLE_TABLE")
- * @DiscriminatorColumn(name="type", type="string")
- * @DiscriminatorMap({
+ * @ORM\Entity
+ * @ORM\Table(name="players_supplies", uniqueConstraints={
+ *      @ORM\UniqueConstraint(name="player_type", columns={"player_id", "type"})})
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="type", type="string")
+ * @ORM\DiscriminatorMap({
  *      "food"     = "\Main\Model\Player\Supply\Food",
  *      "gold"     = "\Main\Model\Player\Supply\Gold",
  *      "stone"    = "\Main\Model\Player\Supply\Stone",
@@ -22,7 +23,7 @@ abstract class Supply extends Asset
 {
     /**
      * @var Player
-     * @ManyToOne(targetEntity="Main\Model\Player", inversedBy="supplies")
+     * @ORM\ManyToOne(targetEntity="Main\Model\Player", inversedBy="supplies")
      */
     protected $player;
 

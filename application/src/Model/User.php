@@ -1,6 +1,7 @@
 <?php
 namespace Main\Model;
 
+use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\EntityRepository;
 use E4u\Common\File\Image;
 use E4u\Authentication\Identity\User as E4uUser;
@@ -8,36 +9,36 @@ use Main\Model\User\Privilege;
 use Laminas\Mail\Address\AddressInterface;
 
 /**
- * @Entity(repositoryClass="Main\Model\User\Repository")
- * @Table(name="users")
+ * @ORM\Entity(repositoryClass="Main\Model\User\Repository")
+ * @ORM\Table(name="users")
  */
 class User extends E4uUser implements AddressInterface
 {
-    /** @Column(type="string") */
+    /** @ORM\Column(type="string") */
     protected $first_name = '';
 
-    /** @Column(type="string") */
+    /** @ORM\Column(type="string") */
     protected $last_name = '';
 
-    /** @Column(type="string", nullable=true) */
+    /** @ORM\Column(type="string", nullable=true) */
     protected $locale = 'pl';
 
     /**
      * @var User\Profile[]
-     * @OneToMany(targetEntity="Main\Model\User\Profile", mappedBy="user", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Main\Model\User\Profile", mappedBy="user", cascade={"all"}, orphanRemoval=true)
      **/
     protected $profiles;
 
     /**
      * @var User\Property[]
-     * @OneToMany(targetEntity="Main\Model\User\Property", mappedBy="user", cascade={"all"}, indexBy="name", orphanRemoval=true)
-     * @OrderBy({"name" = "ASC"})
+     * @ORM\OneToMany(targetEntity="Main\Model\User\Property", mappedBy="user", cascade={"all"}, indexBy="name", orphanRemoval=true)
+     * @ORM\OrderBy({"name" = "ASC"})
      **/
     protected $properties;
 
     /**
      * @var Player
-     * @OneToOne(targetEntity="Main\Model\Player", mappedBy="user", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OneToOne(targetEntity="Main\Model\Player", mappedBy="user", cascade={"all"}, orphanRemoval=true)
      **/
     protected $player;
 
@@ -244,7 +245,7 @@ class User extends E4uUser implements AddressInterface
     /**
      * @return User\Repository|EntityRepository
      */
-    public static function getRepository()
+    public static function getRepository(): EntityRepository
     {
         return parent::getRepository();
     }

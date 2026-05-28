@@ -1,12 +1,14 @@
 <?php
 namespace Main\Model\Player;
 
+
+use Doctrine\ORM\Mapping as ORM;
 use E4u\Model\Entity;
 use Main\Model\Player;
 use Main\Model\Game;
 
 /**
- * @MappedSuperclass
+ * @ORM\MappedSuperclass
  */
 abstract class Asset extends Entity
 {
@@ -15,7 +17,7 @@ abstract class Asset extends Entity
      */
     protected $player;
 
-    /** @Column(type="integer") */
+    /** @ORM\Column(type="integer") */
     protected $amount = 0;
 
     /**

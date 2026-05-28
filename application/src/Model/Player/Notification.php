@@ -1,28 +1,29 @@
 <?php
 namespace Main\Model\Player;
 
+use Doctrine\ORM\Mapping as ORM;
 use E4u\Model\Entity;
 use Main\Model\Player;
 
 /**
- * @Entity
- * @Table(name="players_notifications")
+ * @ORM\Entity
+ * @ORM\Table(name="players_notifications")
  */
 class Notification extends Entity
 {
     /**
      * @var Player
-     * @ManyToOne(targetEntity="Main\Model\Player", inversedBy="notifications")
+     * @ORM\ManyToOne(targetEntity="Main\Model\Player", inversedBy="notifications")
      */
     protected $player;
 
-    /** @Column(type="string") */
+    /** @ORM\Column(type="string") */
     protected $message;
 
-    /** @Column(type="string") */
+    /** @ORM\Column(type="string") */
     protected $type;
 
-    /** @Column(type="datetime") */
+    /** @ORM\Column(type="datetime") */
     protected $created_at;
 
     /**

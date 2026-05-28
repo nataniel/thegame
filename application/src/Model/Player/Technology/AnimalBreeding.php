@@ -1,6 +1,7 @@
 <?php
 namespace Main\Model\Player\Technology;
 
+use Doctrine\ORM\Mapping as ORM;
 use Main\Model\Player\Technology,
     Main\Model\Player\Unit,
     Main\Model\Player\Building,
@@ -9,7 +10,7 @@ use Main\Model\Player\Technology,
 /**
  * Obniża koszt jednostek o 1 żywności.
  *
- * @Entity
+ * @ORM\Entity
  */
 class AnimalBreeding extends Technology
 {

@@ -1,11 +1,12 @@
 <?php
 namespace Main\Model\User;
+use Doctrine\ORM\Mapping as ORM;
 use Main\Model\User;
 
 /**
- * @Entity
- * @Table(name="users_tokens", indexes={
- *     @index(name="user_hash", columns={"user_id", "type", "hash"})
+ * @ORM\Entity
+ * @ORM\Table(name="users_tokens", indexes={
+ *     @ORM\Index(name="user_hash", columns={"user_id", "type", "hash"})
  * })
  */
 class Token extends \E4u\Model\Entity
@@ -17,20 +18,20 @@ class Token extends \E4u\Model\Entity
 
     /**
      * @var User
-     * @ManyToOne(targetEntity="Main\Model\User")
+     * @ORM\ManyToOne(targetEntity="Main\Model\User")
      */
     protected $user;
 
-    /** @Column(type="string") */
+    /** @ORM\Column(type="string") */
     protected $type;
 
-    /** @Column(type="string") */
+    /** @ORM\Column(type="string") */
     protected $hash;
     
-    /** @Column(type="datetime") */
+    /** @ORM\Column(type="datetime") */
     protected $created_at;
 
-    /** @Column(type="datetime", nullable=true) */
+    /** @ORM\Column(type="datetime", nullable=true) */
     protected $expires_at;
 
     /**

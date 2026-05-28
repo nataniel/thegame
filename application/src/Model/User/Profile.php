@@ -1,16 +1,17 @@
 <?php
 namespace Main\Model\User;
 
+use Doctrine\ORM\Mapping as ORM;
 use E4u\Model\Entity;
 use Main\Model\User;
 
 /**
- * @Entity
- * @Table(name="users_profiles", uniqueConstraints={
- *      @UniqueConstraint(name="profile_type", columns={"profile_id", "type"})})
- * @InheritanceType("SINGLE_TABLE")
- * @DiscriminatorColumn(name="type", type="string")
- * @DiscriminatorMap({
+ * @ORM\Entity
+ * @ORM\Table(name="users_profiles", uniqueConstraints={
+ *      @ORM\UniqueConstraint(name="profile_type", columns={"profile_id", "type"})})
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="type", type="string")
+ * @ORM\DiscriminatorMap({
  *      "google" = "\Main\Model\User\Profile\Google",
  *      "facebook" = "\Main\Model\User\Profile\Facebook",
  *      "twitter" = "\Main\Model\User\Profile\Twitter",
@@ -21,14 +22,14 @@ abstract class Profile extends Entity
 {
     /**
      * @var User
-     * @ManyToOne(targetEntity="Main\Model\User", inversedBy="profiles", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Main\Model\User", inversedBy="profiles", cascade={"persist"})
      */
     protected $user;
 
-    /** @Column(type="string") */
+    /** @ORM\Column(type="string") */
     protected $profile_id;
 
-    /** @Column(type="datetime") */
+    /** @ORM\Column(type="datetime") */
     protected $created_at;
 
     /**
